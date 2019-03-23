@@ -1,4 +1,4 @@
-# Practical 2: Finite-Element Soft-Body Deformation
+# Practical 3: Finite-Element Soft-Body Deformation
 
 ## Handout date: 23/Mar/2019.
 
