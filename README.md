@@ -3,7 +3,7 @@
 ## Deadline: 26/Mar/2020 9:00AM.
 
 
-The third practical is about simulating soft bodies with the finite-element method learned in class, where the material is covered in Lecture 8 and its associated lecture notes. The system will handle constraints for you, but you will not be tested on them in the basic version.
+The third practical is about simulating soft bodies with the finite-element method learned in class, where the material is covered in Lecture 10 and its associated lecture notes. The system will handle constraints for you, but you will not be tested on them in the basic version.
 
 
 The objective of the practical are:
@@ -21,7 +21,7 @@ The first considerable difference in the representation of the mesh from the pre
 
 The second considerable difference is that every vertex now has its own volume and mass, and reacts in the world as its own mesh, for the purpose of collisions and constraints. The relationship between the different vertices of the same mesh is generally (unless constrained) done by the forces enacted on them by the FE system. So there is no more total mass and inertia tensor. As an example, in a collision only the colliding vertices move; the deformation this cause creates internal forces the move the entire object. As linear FE is far from perfect, this should cause some visual artifacts that you can witness in the demo.
 
-The objects move in time steps by altering each vertex of the tet mesh, by solving the finite-element equation for movement as learnt in class (*Lecture 8*). For this, you will set up the mass M, damping D, and stiffness K matrices in the beginning of time, and whenever the time step changes. Moreover, you will set up the Cholesky solver that factorizes the left-hand side A of the entire system *once* in every *change* of time step (so it might be only once in the beginning of time unless you are fond of playing with ∆t alot).
+The objects move in time steps by altering each vertex of the tet mesh, by solving the finite-element equation for movement as learnt in class (*Lecture 10*). For this, you will set up the mass M, damping D, and stiffness K matrices in the beginning of time, and whenever the time step changes. Moreover, you will set up the Cholesky solver that factorizes the left-hand side A of the entire system *once* in every *change* of time step (so it might be only once in the beginning of time unless you are fond of playing with ∆t alot).
 
 Note that every vertex has one velocity; this practical will not explicitly model rigid-body behavior with angular velocity in the basic setting.
 
@@ -55,7 +55,7 @@ The above will earn you *70%* of the grade. To get a full grade, you must choose
 
 1. Other than FEM, constrain the boundary edges of the mesh (the edges on the faces) to have flexiblity bounds as constraints, so they do not stretch or compress more than these bounds. *Level: easy*.
 1. Allow to apply random user-prescribed deformations of objects. For instance, instantaenous "squeezing" of an object to see it deform back after a time. **Level: easy-intermediate**. 
-1. Implement the corotational elements method as learnt in class (*lecture 8*). That would require to use a solving method that does not rely on matrix factorization, like conjugate gradients. This is available through Eigen, but you'll have to figure out the details and proper initialization. **Level: intermediate-hard**.
+1. Implement the corotational elements method as learnt in class (*lecture 10*). That would require to use a solving method that does not rely on matrix factorization, like conjugate gradients. This is available through Eigen, but you'll have to figure out the details and proper initialization. **Level: intermediate-hard**.
 1. Hack the visual artifacts of colliding only the touching vertices by sending impulses to the entire body, but weaker than the ones the vertx get. For instance, use some inverse distance weighting to send velocity impulses to the other vertices. *Level: easy*.
 
 You may invent your own extension as substitute to **one** in the list above, but it needs approval on the Lecturer's behalf **beforehand**.
