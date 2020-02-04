@@ -153,7 +153,7 @@ Two functions: ``global2mesh()`` and ``mesh2global()`` update the values back an
 
 ## Submission
 
-The entire code of the practical has to be submitted in a zip file to [f.dambrosio@uu.nl](mailto:f.dambrosio@uu.nl). The deadline is **26/Mar/2020 09:00AM**. Students who have not submitted the practical by that time **will not be checked** in the session.
+The entire code of the practical, plus a video showing your program completing each requirement and extension you've chosen, has to be submitted via BlackBoard. The deadline is **26/Mar/2020 09:00AM**. Students who have not submitted the practical by that time **will not be checked** in the session.
 
 The practical must be done **in pairs**. Doing it alone requires a-priori permission. Any other combination is not allowed.
 
