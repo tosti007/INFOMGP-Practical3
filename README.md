@@ -50,7 +50,7 @@ The scene file contains the necessary material parameters: Young's Modulus, Pois
 
 ### Extensions
 
-The above will earn you *70%* of the grade. To get a full grade, you must choose 1 of these 6 extension options, and augment the practical. Some will require minor adaptations to the GUI or the function structure which are easy to do. Each extension will earn you *15%*, and the exact grading will commensurate with the difficulty. Note that this means that all extensions are equal in grade; if you take on a hard extension, it's your own challenge to complete it well.
+The above will earn you *70%* of the grade. To get a full *100%*, you must choose 1 of these 3 extension options, and augment the practical. Some will require minor adaptations to the GUI or the function structure which are easy to do.
 
 
 1. Other than FEM, constrain the boundary edges of the mesh (the edges on the faces) to have flexiblity bounds as constraints, so they do not stretch or compress more than these bounds. *Level: easy*.
