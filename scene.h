@@ -302,7 +302,7 @@ public:
          *********/
 
         /******************
-         * Computing M, lecture 10, slide 27
+         * Computing M: Mass matrix, lecture 10, slide 27
          */
         // Remove all values, but keep memory allocated
         M.setZero();
@@ -326,7 +326,7 @@ public:
         // M = Diag(m3×3) per vertex
 
         /******************
-         * Computing D, lecture 10, slide 28
+         * Computing D: Damping matrix, lecture 10, slide 28
          */
         D = alpha * M + beta * K;
 
