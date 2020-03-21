@@ -428,6 +428,9 @@ class Scene
 {
 public:
     double currTime;
+    double previous_timestep;
+    double previous_alpha;
+    double previous_beta;
 
     VectorXd globalPositions;  //3*|V| all positions
     VectorXd globalVelocities; //3*|V| all velocities
@@ -462,6 +465,9 @@ public:
     //This should be called whenever the timestep changes
     void initScene(double timeStep, const double alpha, const double beta)
     {
+        previous_timestep = timeStep;
+        previous_alpha = alpha;
+        previous_beta = beta;
 
         for (int i = 0; i < meshes.size(); i++)
         {
@@ -481,6 +487,12 @@ public:
 
     void updateScene(double timeStep, double CRCoeff, const double tolerance, const int maxIterations)
     {
+        /*******************0. Update scene matrices if the timestep has changed************************************/
+        if (previous_timestep != timeStep)
+        {
+            printf("Timestep changed, updating scene data.\n");
+            initScene(timeStep, previous_alpha, previous_beta);
+        }
 
         /*******************1. Integrating velocity and position from external and internal forces************************************/
         for (int i = 0; i < meshes.size(); i++)
