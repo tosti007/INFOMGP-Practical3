@@ -301,6 +301,30 @@ public:
          *********/
 
         /******************
+         * Computing M, lecture 10, slide 27
+         */
+        // Remove all values, but keep memory allocated
+        M.setZero();
+        // Since running through all vertices and taking the tets takes too long we loop over all tets and
+        // take the vertices. Then update the value
+        for (int tid = 0; tid < T.rows(); tid++)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                auto vid = T(tid, i);
+                auto p_i = density; // No idea if this is correct, but since there is no other denisty.
+                auto V_i = tetVolumes(tid);
+                // We devide by 4 since the actual formula is mv = 1/4 SUM_i p_i V_i
+                // coeffRef inserts a new value if it does not exist and returns a reference to that value.
+                M.coeffRef(vid, 0) += p_i * V_i / 4;
+            }
+        }
+        // The slides also say the formula below, as we currently only obtained the mv, but I have no idea what this means.
+        // Considering we have a M = |V|x1 matrix I am assuming we still need to do something.
+        // If this is the case we should change the updating of the value M above to an array as the vertex indices are 0 to N.
+        // M = Diag(m3×3) per vertex
+
+        /******************
          * Computing D, lecture 10, slide 28
          */
         D = alpha * M + beta * K;
@@ -432,6 +456,10 @@ public:
         // So why does the actual amount of positions (devided by 3 since they have 3 values each) differ from the actual amount
         // of vertices?!?!?!?
         assert(T.rows() * 4 == currPositions.rows() / 3);
+
+        // Added for performance
+        // Note that T.rows is not the actual amount of vertices, but it will give atleast somewhat of an estimation.
+        M = SparseMatrix<double>(T.rows() / 2, 1);
     }
 };
 
