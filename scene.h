@@ -302,6 +302,14 @@ public:
          *********/
 
         /******************
+         * Computing K: Stiffnes matrix, 
+         *   - lecture 8, slide 6, 9, 11, 15, 19
+         *   - lecture 10, slide 28
+         * K is a 3v × 3v matrix (lecture 10, slide 24)
+         */
+        // I did not fully understand lecture 8 so I currently cannot implement this yet.
+
+        /******************
          * Computing M: Mass matrix, lecture 10, slide 27
          */
         // Remove all values, but keep memory allocated
@@ -461,6 +469,7 @@ public:
         // Added for performance
         // Note that T.rows is not the actual amount of vertices, but it will give atleast somewhat of an estimation.
         M = SparseMatrix<double>(T.rows() / 2, 1);
+        K = SparseMatrix<double>(0, 0);
     }
 };
 
