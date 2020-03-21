@@ -12,6 +12,7 @@
 #include <igl/per_vertex_normals.h>
 #include <igl/readMESH.h>
 #include <igl/readOFF.h>
+#include <list>
 #include <queue>
 #include <vector>
 

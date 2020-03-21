@@ -9,6 +9,8 @@
 #ifndef auxfunctions_h
 #define auxfunctions_h
 
+#include <iostream>
+
 /*****************************Quaternionic functions***********************************************************/
 
 //returns the conjugate of a quaternion
