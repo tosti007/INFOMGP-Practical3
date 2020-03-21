@@ -1,345 +1,395 @@
-build/cmake_install.cmake
-build/CMakeCache.txt
-build/libigl-config.cmake
-build/libigl-export.cmake
-build/CMakeFiles/cmake.check_cache
-build/CMakeFiles/CMakeOutput.log
-build/CMakeFiles/feature_tests.bin
-build/CMakeFiles/feature_tests.c
-build/CMakeFiles/feature_tests.cxx
-build/CMakeFiles/TargetDirectories.txt
-build/CMakeFiles/3.12.4/CMakeCCompiler.cmake
-build/CMakeFiles/3.12.4/CMakeCXXCompiler.cmake
-build/CMakeFiles/3.12.4/CMakeDetermineCompilerABI_C.bin
-build/CMakeFiles/3.12.4/CMakeDetermineCompilerABI_CXX.bin
-build/CMakeFiles/3.12.4/CMakeSystem.cmake
-build/CMakeFiles/3.12.4/CompilerIdC/CMakeCCompilerId.c
-build/CMakeFiles/3.12.4/CompilerIdC/CompilerIdC
-build/CMakeFiles/3.12.4/CompilerIdC/CompilerIdC.build/Debug/CompilerIdC.build/all-product-headers.yaml
-build/CMakeFiles/3.12.4/CompilerIdC/CompilerIdC.build/Debug/CompilerIdC.build/CompilerIdC-all-non-framework-target-headers.hmap
-build/CMakeFiles/3.12.4/CompilerIdC/CompilerIdC.build/Debug/CompilerIdC.build/CompilerIdC-all-target-headers.hmap
-build/CMakeFiles/3.12.4/CompilerIdC/CompilerIdC.build/Debug/CompilerIdC.build/CompilerIdC-generated-files.hmap
-build/CMakeFiles/3.12.4/CompilerIdC/CompilerIdC.build/Debug/CompilerIdC.build/CompilerIdC-own-target-headers.hmap
-build/CMakeFiles/3.12.4/CompilerIdC/CompilerIdC.build/Debug/CompilerIdC.build/CompilerIdC-project-headers.hmap
-build/CMakeFiles/3.12.4/CompilerIdC/CompilerIdC.build/Debug/CompilerIdC.build/CompilerIdC.hmap
-build/CMakeFiles/3.12.4/CompilerIdC/CompilerIdC.build/Debug/CompilerIdC.build/Script-2C8FEB8E15DC1A1A00E56A5D.sh
-build/CMakeFiles/3.12.4/CompilerIdC/CompilerIdC.build/Debug/CompilerIdC.build/Objects-normal/x86_64/CMakeCCompilerId.d
-build/CMakeFiles/3.12.4/CompilerIdC/CompilerIdC.build/Debug/CompilerIdC.build/Objects-normal/x86_64/CMakeCCompilerId.dia
-build/CMakeFiles/3.12.4/CompilerIdC/CompilerIdC.build/Debug/CompilerIdC.build/Objects-normal/x86_64/CMakeCCompilerId.o
-build/CMakeFiles/3.12.4/CompilerIdC/CompilerIdC.build/Debug/CompilerIdC.build/Objects-normal/x86_64/CompilerIdC.LinkFileList
-build/CMakeFiles/3.12.4/CompilerIdC/CompilerIdC.build/Debug/CompilerIdC.build/Objects-normal/x86_64/CompilerIdC_dependency_info.dat
-build/CMakeFiles/3.12.4/CompilerIdC/CompilerIdC.xcodeproj/project.pbxproj
-build/CMakeFiles/3.12.4/CompilerIdC/XCBuildData/build.db
-build/CMakeFiles/3.12.4/CompilerIdC/XCBuildData/BuildDescriptionCacheIndex-e58b9be134e35135830d7003d8eccd72
-build/CMakeFiles/3.12.4/CompilerIdC/XCBuildData/c82fdeee2bfa12491a4191e62f60a9ec-desc.xcbuild
-build/CMakeFiles/3.12.4/CompilerIdC/XCBuildData/c82fdeee2bfa12491a4191e62f60a9ec-manifest.xcbuild
-build/CMakeFiles/3.12.4/CompilerIdCXX/CMakeCXXCompilerId.cpp
-build/CMakeFiles/3.12.4/CompilerIdCXX/CompilerIdCXX
-build/CMakeFiles/3.12.4/CompilerIdCXX/CompilerIdCXX.build/Debug/CompilerIdCXX.build/all-product-headers.yaml
-build/CMakeFiles/3.12.4/CompilerIdCXX/CompilerIdCXX.build/Debug/CompilerIdCXX.build/CompilerIdCXX-all-non-framework-target-headers.hmap
-build/CMakeFiles/3.12.4/CompilerIdCXX/CompilerIdCXX.build/Debug/CompilerIdCXX.build/CompilerIdCXX-all-target-headers.hmap
-build/CMakeFiles/3.12.4/CompilerIdCXX/CompilerIdCXX.build/Debug/CompilerIdCXX.build/CompilerIdCXX-generated-files.hmap
-build/CMakeFiles/3.12.4/CompilerIdCXX/CompilerIdCXX.build/Debug/CompilerIdCXX.build/CompilerIdCXX-own-target-headers.hmap
-build/CMakeFiles/3.12.4/CompilerIdCXX/CompilerIdCXX.build/Debug/CompilerIdCXX.build/CompilerIdCXX-project-headers.hmap
-build/CMakeFiles/3.12.4/CompilerIdCXX/CompilerIdCXX.build/Debug/CompilerIdCXX.build/CompilerIdCXX.hmap
-build/CMakeFiles/3.12.4/CompilerIdCXX/CompilerIdCXX.build/Debug/CompilerIdCXX.build/Script-2C8FEB8E15DC1A1A00E56A5D.sh
-build/CMakeFiles/3.12.4/CompilerIdCXX/CompilerIdCXX.build/Debug/CompilerIdCXX.build/Objects-normal/x86_64/CMakeCXXCompilerId.d
-build/CMakeFiles/3.12.4/CompilerIdCXX/CompilerIdCXX.build/Debug/CompilerIdCXX.build/Objects-normal/x86_64/CMakeCXXCompilerId.dia
-build/CMakeFiles/3.12.4/CompilerIdCXX/CompilerIdCXX.build/Debug/CompilerIdCXX.build/Objects-normal/x86_64/CMakeCXXCompilerId.o
-build/CMakeFiles/3.12.4/CompilerIdCXX/CompilerIdCXX.build/Debug/CompilerIdCXX.build/Objects-normal/x86_64/CompilerIdCXX.LinkFileList
-build/CMakeFiles/3.12.4/CompilerIdCXX/CompilerIdCXX.build/Debug/CompilerIdCXX.build/Objects-normal/x86_64/CompilerIdCXX_dependency_info.dat
-build/CMakeFiles/3.12.4/CompilerIdCXX/CompilerIdCXX.xcodeproj/project.pbxproj
-build/CMakeFiles/3.12.4/CompilerIdCXX/XCBuildData/b872675de70b2162d138e824d2db010a-desc.xcbuild
-build/CMakeFiles/3.12.4/CompilerIdCXX/XCBuildData/b872675de70b2162d138e824d2db010a-manifest.xcbuild
-build/CMakeFiles/3.12.4/CompilerIdCXX/XCBuildData/build.db
-build/CMakeFiles/3.12.4/CompilerIdCXX/XCBuildData/BuildDescriptionCacheIndex-700f119ffb4f7bc56e4dcbac64ac441f
-build/CMakeFiles/Export/share/libigl/cmake/libigl-export.cmake
-build/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.makeDebug
-build/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.makeMinSizeRel
-build/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.makeRelease
-build/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.makeRelWithDebInfo
-build/CMakeScripts/install_postBuildPhase.makeDebug
-build/CMakeScripts/install_postBuildPhase.makeMinSizeRel
-build/CMakeScripts/install_postBuildPhase.makeRelease
-build/CMakeScripts/install_postBuildPhase.makeRelWithDebInfo
-build/CMakeScripts/ReRunCMake.make
-build/CMakeScripts/XCODE_DEPEND_HELPER.make
-build/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.makeDebug
-build/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.makeMinSizeRel
-build/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.makeRelease
-build/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.makeRelWithDebInfo
-build/Debug/Practical3_bin
-build/glad/cmake_install.cmake
-build/glad/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.makeDebug
-build/glad/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.makeMinSizeRel
-build/glad/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.makeRelease
-build/glad/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.makeRelWithDebInfo
-build/glad/CMakeScripts/install_postBuildPhase.makeDebug
-build/glad/CMakeScripts/install_postBuildPhase.makeMinSizeRel
-build/glad/CMakeScripts/install_postBuildPhase.makeRelease
-build/glad/CMakeScripts/install_postBuildPhase.makeRelWithDebInfo
-build/glad/CMakeScripts/ReRunCMake.make
-build/glad/CMakeScripts/XCODE_DEPEND_HELPER.make
-build/glad/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.makeDebug
-build/glad/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.makeMinSizeRel
-build/glad/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.makeRelease
-build/glad/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.makeRelWithDebInfo
-build/glad/Debug/libglad.a
-build/glad/glad.xcodeproj/project.pbxproj
-build/glad/glad.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
-build/glad/Practical3.build/Debug/glad.build/dgph
-build/glad/Practical3.build/Debug/glad.build/Objects-normal/x86_64/glad.d
-build/glad/Practical3.build/Debug/glad.build/Objects-normal/x86_64/glad.dia
-build/glad/Practical3.build/Debug/glad.build/Objects-normal/x86_64/glad.LinkFileList
-build/glad/Practical3.build/Debug/glad.build/Objects-normal/x86_64/glad.o
-build/glad/Practical3.build/Release/glad.build/dgph
-build/glad/Practical3.build/Release/glad.build/Objects-normal/x86_64/glad.d
-build/glad/Practical3.build/Release/glad.build/Objects-normal/x86_64/glad.dia
-build/glad/Practical3.build/Release/glad.build/Objects-normal/x86_64/glad.LinkFileList
-build/glad/Practical3.build/Release/glad.build/Objects-normal/x86_64/glad.o
-build/glad/Release/libglad.a
-build/glfw/cmake_install.cmake
-build/glfw/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.makeDebug
-build/glfw/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.makeMinSizeRel
-build/glfw/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.makeRelease
-build/glfw/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.makeRelWithDebInfo
-build/glfw/CMakeScripts/install_postBuildPhase.makeDebug
-build/glfw/CMakeScripts/install_postBuildPhase.makeMinSizeRel
-build/glfw/CMakeScripts/install_postBuildPhase.makeRelease
-build/glfw/CMakeScripts/install_postBuildPhase.makeRelWithDebInfo
-build/glfw/CMakeScripts/ReRunCMake.make
-build/glfw/CMakeScripts/XCODE_DEPEND_HELPER.make
-build/glfw/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.makeDebug
-build/glfw/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.makeMinSizeRel
-build/glfw/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.makeRelease
-build/glfw/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.makeRelWithDebInfo
-build/glfw/GLFW.xcodeproj/project.pbxproj
-build/glfw/GLFW.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
-build/glfw/src/cmake_install.cmake
-build/glfw/src/glfw3.pc
-build/glfw/src/glfw3Config.cmake
-build/glfw/src/glfw3ConfigVersion.cmake
-build/glfw/src/glfw_config.h
-build/glfw/src/Debug/libglfw3.a
-build/glfw/src/Practical3.build/Debug/glfw.build/dgph
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/cocoa_init.d
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/cocoa_init.dia
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/cocoa_init.o
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/cocoa_joystick.d
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/cocoa_joystick.dia
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/cocoa_joystick.o
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/cocoa_monitor.d
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/cocoa_monitor.dia
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/cocoa_monitor.o
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/cocoa_time.d
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/cocoa_time.dia
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/cocoa_time.o
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/cocoa_window.d
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/cocoa_window.dia
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/cocoa_window.o
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/context.d
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/context.dia
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/context.o
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/egl_context.d
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/egl_context.dia
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/egl_context.o
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/glfw3.LinkFileList
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/init.d
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/init.dia
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/init.o
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/input.d
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/input.dia
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/input.o
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/monitor.d
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/monitor.dia
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/monitor.o
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/nsgl_context.d
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/nsgl_context.dia
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/nsgl_context.o
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/osmesa_context.d
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/osmesa_context.dia
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/osmesa_context.o
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/posix_thread.d
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/posix_thread.dia
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/posix_thread.o
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/vulkan.d
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/vulkan.dia
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/vulkan.o
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/window.d
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/window.dia
-build/glfw/src/Practical3.build/Debug/glfw.build/Objects-normal/x86_64/window.o
-build/glfw/src/Practical3.build/Release/glfw.build/dgph
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/cocoa_init.d
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/cocoa_init.dia
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/cocoa_init.o
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/cocoa_joystick.d
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/cocoa_joystick.dia
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/cocoa_joystick.o
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/cocoa_monitor.d
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/cocoa_monitor.dia
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/cocoa_monitor.o
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/cocoa_time.d
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/cocoa_time.dia
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/cocoa_time.o
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/cocoa_window.d
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/cocoa_window.dia
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/cocoa_window.o
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/context.d
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/context.dia
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/context.o
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/egl_context.d
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/egl_context.dia
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/egl_context.o
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/glfw3.LinkFileList
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/init.d
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/init.dia
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/init.o
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/input.d
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/input.dia
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/input.o
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/monitor.d
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/monitor.dia
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/monitor.o
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/nsgl_context.d
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/nsgl_context.dia
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/nsgl_context.o
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/osmesa_context.d
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/osmesa_context.dia
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/osmesa_context.o
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/posix_thread.d
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/posix_thread.dia
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/posix_thread.o
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/vulkan.d
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/vulkan.dia
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/vulkan.o
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/window.d
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/window.dia
-build/glfw/src/Practical3.build/Release/glfw.build/Objects-normal/x86_64/window.o
-build/glfw/src/Release/libglfw3.a
-build/imgui/cmake_install.cmake
-build/imgui/Debug/libimgui.a
-build/imgui/Practical3.build/Debug/imgui.build/dgph
-build/imgui/Practical3.build/Debug/imgui.build/Objects-normal/x86_64/imgui.d
-build/imgui/Practical3.build/Debug/imgui.build/Objects-normal/x86_64/imgui.dia
-build/imgui/Practical3.build/Debug/imgui.build/Objects-normal/x86_64/imgui.LinkFileList
-build/imgui/Practical3.build/Debug/imgui.build/Objects-normal/x86_64/imgui.o
-build/imgui/Practical3.build/Debug/imgui.build/Objects-normal/x86_64/imgui_demo.d
-build/imgui/Practical3.build/Debug/imgui.build/Objects-normal/x86_64/imgui_demo.dia
-build/imgui/Practical3.build/Debug/imgui.build/Objects-normal/x86_64/imgui_demo.o
-build/imgui/Practical3.build/Debug/imgui.build/Objects-normal/x86_64/imgui_draw.d
-build/imgui/Practical3.build/Debug/imgui.build/Objects-normal/x86_64/imgui_draw.dia
-build/imgui/Practical3.build/Debug/imgui.build/Objects-normal/x86_64/imgui_draw.o
-build/imgui/Practical3.build/Debug/imgui.build/Objects-normal/x86_64/imgui_impl_glfw.d
-build/imgui/Practical3.build/Debug/imgui.build/Objects-normal/x86_64/imgui_impl_glfw.dia
-build/imgui/Practical3.build/Debug/imgui.build/Objects-normal/x86_64/imgui_impl_glfw.o
-build/imgui/Practical3.build/Debug/imgui.build/Objects-normal/x86_64/imgui_impl_opengl3.d
-build/imgui/Practical3.build/Debug/imgui.build/Objects-normal/x86_64/imgui_impl_opengl3.dia
-build/imgui/Practical3.build/Debug/imgui.build/Objects-normal/x86_64/imgui_impl_opengl3.o
-build/imgui/Practical3.build/Release/imgui.build/dgph
-build/imgui/Practical3.build/Release/imgui.build/Objects-normal/x86_64/imgui.d
-build/imgui/Practical3.build/Release/imgui.build/Objects-normal/x86_64/imgui.dia
-build/imgui/Practical3.build/Release/imgui.build/Objects-normal/x86_64/imgui.LinkFileList
-build/imgui/Practical3.build/Release/imgui.build/Objects-normal/x86_64/imgui.o
-build/imgui/Practical3.build/Release/imgui.build/Objects-normal/x86_64/imgui_demo.d
-build/imgui/Practical3.build/Release/imgui.build/Objects-normal/x86_64/imgui_demo.dia
-build/imgui/Practical3.build/Release/imgui.build/Objects-normal/x86_64/imgui_demo.o
-build/imgui/Practical3.build/Release/imgui.build/Objects-normal/x86_64/imgui_draw.d
-build/imgui/Practical3.build/Release/imgui.build/Objects-normal/x86_64/imgui_draw.dia
-build/imgui/Practical3.build/Release/imgui.build/Objects-normal/x86_64/imgui_draw.o
-build/imgui/Practical3.build/Release/imgui.build/Objects-normal/x86_64/imgui_impl_glfw.d
-build/imgui/Practical3.build/Release/imgui.build/Objects-normal/x86_64/imgui_impl_glfw.dia
-build/imgui/Practical3.build/Release/imgui.build/Objects-normal/x86_64/imgui_impl_glfw.o
-build/imgui/Practical3.build/Release/imgui.build/Objects-normal/x86_64/imgui_impl_opengl3.d
-build/imgui/Practical3.build/Release/imgui.build/Objects-normal/x86_64/imgui_impl_opengl3.dia
-build/imgui/Practical3.build/Release/imgui.build/Objects-normal/x86_64/imgui_impl_opengl3.o
-build/imgui/Release/libimgui.a
-build/Practical3.build/Debug/ALL_BUILD.build/dgph
-build/Practical3.build/Debug/ALL_BUILD.build/Script-3D7F9BAC3C314FBF83C4D4CA.sh
-build/Practical3.build/Debug/Practical3_bin.build/dgph
-build/Practical3.build/Debug/Practical3_bin.build/Objects-normal/x86_64/ccd.d
-build/Practical3.build/Debug/Practical3_bin.build/Objects-normal/x86_64/ccd.dia
-build/Practical3.build/Debug/Practical3_bin.build/Objects-normal/x86_64/ccd.o
-build/Practical3.build/Debug/Practical3_bin.build/Objects-normal/x86_64/main.d
-build/Practical3.build/Debug/Practical3_bin.build/Objects-normal/x86_64/main.dia
-build/Practical3.build/Debug/Practical3_bin.build/Objects-normal/x86_64/main.o
-build/Practical3.build/Debug/Practical3_bin.build/Objects-normal/x86_64/mpr.d
-build/Practical3.build/Debug/Practical3_bin.build/Objects-normal/x86_64/mpr.dia
-build/Practical3.build/Debug/Practical3_bin.build/Objects-normal/x86_64/mpr.o
-build/Practical3.build/Debug/Practical3_bin.build/Objects-normal/x86_64/polytope.d
-build/Practical3.build/Debug/Practical3_bin.build/Objects-normal/x86_64/polytope.dia
-build/Practical3.build/Debug/Practical3_bin.build/Objects-normal/x86_64/polytope.o
-build/Practical3.build/Debug/Practical3_bin.build/Objects-normal/x86_64/Practical3_bin.LinkFileList
-build/Practical3.build/Debug/Practical3_bin.build/Objects-normal/x86_64/Practical3_bin_dependency_info.dat
-build/Practical3.build/Debug/Practical3_bin.build/Objects-normal/x86_64/support.d
-build/Practical3.build/Debug/Practical3_bin.build/Objects-normal/x86_64/support.dia
-build/Practical3.build/Debug/Practical3_bin.build/Objects-normal/x86_64/support.o
-build/Practical3.build/Debug/Practical3_bin.build/Objects-normal/x86_64/vec3.d
-build/Practical3.build/Debug/Practical3_bin.build/Objects-normal/x86_64/vec3.dia
-build/Practical3.build/Debug/Practical3_bin.build/Objects-normal/x86_64/vec3.o
-build/Practical3.build/Debug/ZERO_CHECK.build/dgph
-build/Practical3.build/Debug/ZERO_CHECK.build/Script-8561A47743274CDF91D3C64F.sh
-build/Practical3.build/Release/Practical3_bin.build/dgph
-build/Practical3.build/Release/Practical3_bin.build/Objects-normal/x86_64/ccd.d
-build/Practical3.build/Release/Practical3_bin.build/Objects-normal/x86_64/ccd.dia
-build/Practical3.build/Release/Practical3_bin.build/Objects-normal/x86_64/ccd.o
-build/Practical3.build/Release/Practical3_bin.build/Objects-normal/x86_64/main.d
-build/Practical3.build/Release/Practical3_bin.build/Objects-normal/x86_64/main.dia
-build/Practical3.build/Release/Practical3_bin.build/Objects-normal/x86_64/main.o
-build/Practical3.build/Release/Practical3_bin.build/Objects-normal/x86_64/mpr.d
-build/Practical3.build/Release/Practical3_bin.build/Objects-normal/x86_64/mpr.dia
-build/Practical3.build/Release/Practical3_bin.build/Objects-normal/x86_64/mpr.o
-build/Practical3.build/Release/Practical3_bin.build/Objects-normal/x86_64/polytope.d
-build/Practical3.build/Release/Practical3_bin.build/Objects-normal/x86_64/polytope.dia
-build/Practical3.build/Release/Practical3_bin.build/Objects-normal/x86_64/polytope.o
-build/Practical3.build/Release/Practical3_bin.build/Objects-normal/x86_64/Practical3_bin.LinkFileList
-build/Practical3.build/Release/Practical3_bin.build/Objects-normal/x86_64/Practical3_bin_dependency_info.dat
-build/Practical3.build/Release/Practical3_bin.build/Objects-normal/x86_64/support.d
-build/Practical3.build/Release/Practical3_bin.build/Objects-normal/x86_64/support.dia
-build/Practical3.build/Release/Practical3_bin.build/Objects-normal/x86_64/support.o
-build/Practical3.build/Release/Practical3_bin.build/Objects-normal/x86_64/vec3.d
-build/Practical3.build/Release/Practical3_bin.build/Objects-normal/x86_64/vec3.dia
-build/Practical3.build/Release/Practical3_bin.build/Objects-normal/x86_64/vec3.o
-build/Practical3.build/Release/ZERO_CHECK.build/dgph
-build/Practical3.build/Release/ZERO_CHECK.build/Script-8561A47743274CDF91D3C64F.sh
-build/Practical3.xcodeproj/project.pbxproj
-build/Practical3.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
-build/Practical3.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
-build/Practical3.xcodeproj/project.xcworkspace/xcuserdata/amirvaxman.xcuserdatad/WorkspaceSettings.xcsettings
-build/Practical3.xcodeproj/xcshareddata/xcschemes/Practical3_bin.xcscheme
-build/Practical3.xcodeproj/xcuserdata/amirvaxman.xcuserdatad/xcschemes/xcschememanagement.plist
-build/Release/Practical3_bin
-build/tetgen/cmake_install.cmake
-build/tetgen/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.makeDebug
-build/tetgen/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.makeMinSizeRel
-build/tetgen/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.makeRelease
-build/tetgen/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.makeRelWithDebInfo
-build/tetgen/CMakeScripts/install_postBuildPhase.makeDebug
-build/tetgen/CMakeScripts/install_postBuildPhase.makeMinSizeRel
-build/tetgen/CMakeScripts/install_postBuildPhase.makeRelease
-build/tetgen/CMakeScripts/install_postBuildPhase.makeRelWithDebInfo
-build/tetgen/CMakeScripts/ReRunCMake.make
-build/tetgen/CMakeScripts/XCODE_DEPEND_HELPER.make
-build/tetgen/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.makeDebug
-build/tetgen/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.makeMinSizeRel
-build/tetgen/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.makeRelease
-build/tetgen/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.makeRelWithDebInfo
-build/tetgen/Debug/libtetgen.a
-build/tetgen/Practical3.build/Debug/tetgen.build/dgph
-build/tetgen/Practical3.build/Debug/tetgen.build/Objects-normal/x86_64/predicates.d
-build/tetgen/Practical3.build/Debug/tetgen.build/Objects-normal/x86_64/predicates.dia
-build/tetgen/Practical3.build/Debug/tetgen.build/Objects-normal/x86_64/predicates.o
-build/tetgen/Practical3.build/Debug/tetgen.build/Objects-normal/x86_64/tetgen.d
-build/tetgen/Practical3.build/Debug/tetgen.build/Objects-normal/x86_64/tetgen.dia
-build/tetgen/Practical3.build/Debug/tetgen.build/Objects-normal/x86_64/tetgen.LinkFileList
-build/tetgen/Practical3.build/Debug/tetgen.build/Objects-normal/x86_64/tetgen.o
-build/tetgen/Practical3.build/Release/tetgen.build/dgph
-build/tetgen/Practical3.build/Release/tetgen.build/Objects-normal/x86_64/predicates.d
-build/tetgen/Practical3.build/Release/tetgen.build/Objects-normal/x86_64/predicates.dia
-build/tetgen/Practical3.build/Release/tetgen.build/Objects-normal/x86_64/predicates.o
-build/tetgen/Practical3.build/Release/tetgen.build/Objects-normal/x86_64/tetgen.d
-build/tetgen/Practical3.build/Release/tetgen.build/Objects-normal/x86_64/tetgen.dia
-build/tetgen/Practical3.build/Release/tetgen.build/Objects-normal/x86_64/tetgen.LinkFileList
-build/tetgen/Practical3.build/Release/tetgen.build/Objects-normal/x86_64/tetgen.o
-build/tetgen/Release/libtetgen.a
-build/tetgen/tetgen.xcodeproj/project.pbxproj
-build/tetgen/tetgen.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+## Ignore Visual Studio temporary files, build results, and
+## files generated by popular Visual Studio add-ons.
+##
+## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+*.userprefs
+
+# Mono auto generated files
+mono_crash.*
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/
+# Uncomment if you have tasks that create the project's static files in wwwroot
+#wwwroot/
+
+# Visual Studio 2017 auto generated files
+Generated\ Files/
+
+# MSTest test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# NUnit
+*.VisualState.xml
+TestResult.xml
+nunit-*.xml
+
+# Build Results of an ATL Project
+[Dd]ebugPS/
+[Rr]eleasePS/
+dlldata.c
+
+# Benchmark Results
+BenchmarkDotNet.Artifacts/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# StyleCop
+StyleCopReport.xml
+
+# Files built by Visual Studio
+*_i.c
+*_p.c
+*_h.h
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.tli
+*.tlh
+*.tmp
+*.tmp_proj
+*_wpftmp.csproj
+*.log
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+# Chutzpah Test files
+_Chutzpah*
+
+# Visual C++ cache files
+ipch/
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
+*.VC.db
+*.VC.VC.opendb
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# Visual Studio Trace Files
+*.e2e
+
+# TFS 2012 Local Workspace
+$tf/
+
+# Guidance Automation Toolkit
+*.gpState
+
+# ReSharper is a .NET coding add-in
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# TeamCity is a build add-in
+_TeamCity*
+
+# DotCover is a Code Coverage Tool
+*.dotCover
+
+# AxoCover is a Code Coverage Tool
+.axoCover/*
+!.axoCover/settings.json
+
+# Coverlet is a free, cross platform Code Coverage Tool
+coverage*[.json, .xml, .info]
+
+# Visual Studio code coverage results
+*.coverage
+*.coveragexml
+
+# NCrunch
+_NCrunch_*
+.*crunch*.local.xml
+nCrunchTemp_*
+
+# MightyMoose
+*.mm.*
+AutoTest.Net/
+
+# Web workbench (sass)
+.sass-cache/
+
+# Installshield output folder
+[Ee]xpress/
+
+# DocProject is a documentation generator add-in
+DocProject/buildhelp/
+DocProject/Help/*.HxT
+DocProject/Help/*.HxC
+DocProject/Help/*.hhc
+DocProject/Help/*.hhk
+DocProject/Help/*.hhp
+DocProject/Help/Html2
+DocProject/Help/html
+
+# Click-Once directory
+publish/
+
+# Publish Web Output
+*.[Pp]ublish.xml
+*.azurePubxml
+# Note: Comment the next line if you want to checkin your web deploy settings,
+# but database connection strings (with potential passwords) will be unencrypted
+*.pubxml
+*.publishproj
+
+# Microsoft Azure Web App publish settings. Comment the next line if you want to
+# checkin your Azure Web App publish settings, but sensitive information contained
+# in these scripts will be unencrypted
+PublishScripts/
+
+# NuGet Packages
+*.nupkg
+# NuGet Symbol Packages
+*.snupkg
+# The packages folder can be ignored because of Package Restore
+**/[Pp]ackages/*
+# except build/, which is used as an MSBuild target.
+!**/[Pp]ackages/build/
+# Uncomment if necessary however generally it will be regenerated when needed
+#!**/[Pp]ackages/repositories.config
+# NuGet v3's project.json files produces more ignorable files
+*.nuget.props
+*.nuget.targets
+
+# Microsoft Azure Build Output
+csx/
+*.build.csdef
+
+# Microsoft Azure Emulator
+ecf/
+rcf/
+
+# Windows Store app package directories and files
+AppPackages/
+BundleArtifacts/
+Package.StoreAssociation.xml
+_pkginfo.txt
+*.appx
+*.appxbundle
+*.appxupload
+
+# Visual Studio cache files
+# files ending in .cache can be ignored
+*.[Cc]ache
+# but keep track of directories ending in .cache
+!?*.[Cc]ache/
+
+# Others
+ClientBin/
+~$*
+*~
+*.dbmdl
+*.dbproj.schemaview
+*.jfm
+*.pfx
+*.publishsettings
+orleans.codegen.cs
+
+# Including strong name files can present a security risk
+# (https://github.com/github/gitignore/pull/2483#issue-259490424)
+#*.snk
+
+# Since there are multiple workflows, uncomment next line to ignore bower_components
+# (https://github.com/github/gitignore/pull/1529#issuecomment-104372622)
+#bower_components/
+
+# RIA/Silverlight projects
+Generated_Code/
+
+# Backup & report files from converting an old project file
+# to a newer Visual Studio version. Backup files are not needed,
+# because we have git ;-)
+_UpgradeReport_Files/
+Backup*/
+UpgradeLog*.XML
+UpgradeLog*.htm
+ServiceFabricBackup/
+*.rptproj.bak
+
+# SQL Server files
+*.mdf
+*.ldf
+*.ndf
+
+# Business Intelligence projects
+*.rdl.data
+*.bim.layout
+*.bim_*.settings
+*.rptproj.rsuser
+*- [Bb]ackup.rdl
+*- [Bb]ackup ([0-9]).rdl
+*- [Bb]ackup ([0-9][0-9]).rdl
+
+# Microsoft Fakes
+FakesAssemblies/
+
+# GhostDoc plugin setting file
+*.GhostDoc.xml
+
+# Node.js Tools for Visual Studio
+.ntvs_analysis.dat
+node_modules/
+
+# Visual Studio 6 build log
+*.plg
+
+# Visual Studio 6 workspace options file
+*.opt
+
+# Visual Studio 6 auto-generated workspace file (contains which files were open etc.)
+*.vbw
+
+# Visual Studio LightSwitch build output
+**/*.HTMLClient/GeneratedArtifacts
+**/*.DesktopClient/GeneratedArtifacts
+**/*.DesktopClient/ModelManifest.xml
+**/*.Server/GeneratedArtifacts
+**/*.Server/ModelManifest.xml
+_Pvt_Extensions
+
+# Paket dependency manager
+.paket/paket.exe
+paket-files/
+
+# FAKE - F# Make
+.fake/
+
+# CodeRush personal settings
+.cr/personal
+
+# Python Tools for Visual Studio (PTVS)
+__pycache__/
+*.pyc
+
+# Cake - Uncomment if you are using it
+# tools/**
+# !tools/packages.config
+
+# Tabs Studio
+*.tss
+
+# Telerik's JustMock configuration file
+*.jmconfig
+
+# BizTalk build output
+*.btp.cs
+*.btm.cs
+*.odx.cs
+*.xsd.cs
+
+# OpenCover UI analysis results
+OpenCover/
+
+# Azure Stream Analytics local run output
+ASALocalRun/
+
+# MSBuild Binary and Structured Log
+*.binlog
+
+# NVidia Nsight GPU debugger configuration file
+*.nvuser
+
+# MFractors (Xamarin productivity tool) working folder
+.mfractor/
+
+# Local History for Visual Studio
+.localhistory/
+
+# BeatPulse healthcheck temp database
+healthchecksdb
+
+# Backup folder for Package Reference Convert tool in Visual Studio 2017
+MigrationBackup/
+
+# Ionide (cross platform F# VS Code tools) working folder
+.ionide/
+
+
+# C++ gitignore
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Custom gitignore
+build
