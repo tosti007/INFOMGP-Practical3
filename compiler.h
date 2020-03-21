@@ -23,57 +23,52 @@
 #define ccd_offsetof(TYPE, MEMBER) offsetof(TYPE, MEMBER)
 
 #define ccd_container_of(ptr, type, member) \
-    (type *)( (char *)ptr - ccd_offsetof(type, member))
-
+    (type *)((char *)ptr - ccd_offsetof(type, member))
 
 /**
  * Marks exported function.
  */
 #ifdef _WIN32
-# ifdef ccd_EXPORTS
-#   define _ccd_export __declspec(dllexport)
-# else /* ccd_EXPORTS */
-#   define _ccd_export __declspec(dllimport)
-# endif /* ccd_EXPORTS */
-#else /* _WIN32 */
-# define _ccd_export
+#ifdef ccd_EXPORTS
+#define _ccd_export __declspec(dllexport)
+#else /* ccd_EXPORTS */
+#define _ccd_export __declspec(dllimport)
+#endif /* ccd_EXPORTS */
+#else  /* _WIN32 */
+#define _ccd_export
 #endif /* _WIN32 */
-
 
 /**
  * Marks inline function.
  */
 #ifdef __GNUC__
-# define _ccd_inline static inline __attribute__((always_inline))
+#define _ccd_inline static inline __attribute__((always_inline))
 #else /* __GNUC__ */
-# define _ccd_inline static __inline
+#define _ccd_inline static __inline
 #endif /* __GNUC__ */
-
 
 /**
  * __prefetch(x)  - prefetches the cacheline at "x" for read
  * __prefetchw(x) - prefetches the cacheline at "x" for write
  */
 #ifdef __GNUC__
-# define _ccd_prefetch(x) __builtin_prefetch(x)
-# define _ccd_prefetchw(x) __builtin_prefetch(x,1)
+#define _ccd_prefetch(x) __builtin_prefetch(x)
+#define _ccd_prefetchw(x) __builtin_prefetch(x, 1)
 #else /* __GNUC__ */
-# define _ccd_prefetch(x) ((void)0)
-# define _ccd_prefetchw(x) ((void)0)
+#define _ccd_prefetch(x) ((void)0)
+#define _ccd_prefetchw(x) ((void)0)
 #endif /* __GNUC__ */
-
 
 #ifdef __ICC
 // disable unused parameter warning
-# pragma warning(disable:869)
+#pragma warning(disable : 869)
 // disable annoying "operands are evaluated in unspecified order" warning
-# pragma warning(disable:981)
+#pragma warning(disable : 981)
 #endif /* __ICC */
 
 #ifdef _MSC_VER
 // disable unsafe function warning
-# define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #endif /* _MSC_VER */
 
 #endif /* __CCD_COMPILER_H__ */
-
