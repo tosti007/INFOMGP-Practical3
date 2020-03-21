@@ -425,6 +425,13 @@ public:
             boundTets(i) = boundTList[i];
 
         ASolver = NULL;
+
+        // Was just wondering if this holds, and it does. So might as well leave it here as an example.
+        // On a second note, why does this hold? Each tet has 4 vertices, so hence we devide by 4 to get the total number of vertices.
+        // BUT these vertices are duplicates of one another as the vertices are reused. So we have less than rows/4 vertices.
+        // So why does the actual amount of positions (devided by 3 since they have 3 values each) differ from the actual amount
+        // of vertices?!?!?!?
+        assert(T.rows() * 4 == currPositions.rows() / 3);
     }
 };
 
