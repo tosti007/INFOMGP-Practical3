@@ -350,7 +350,6 @@ public:
     //returns center of mass
     Vector3d initializeVolumesAndMasses()
     {
-        //TODO: compute tet volumes and allocate to vertices
         tetVolumes.conservativeResize(T.rows());
         voronoiVolumes.conservativeResize(origPositions.size() / 3);
         voronoiVolumes.setZero();
@@ -596,7 +595,6 @@ public:
             {
                 int currIndex = currConstraint.globalIndices(i);
                 globalVelocities(currIndex) += globalInvMasses(currIndex) * generatedImpulses(i);
-                //TODO: velocity bias
                 //if (timeStep>tolerance)
                 //  rawImpulses(fullConstraints[currConstraint].particleIndices(i))+=CRCoeff*currDiff(i)/timeStep;
             }
