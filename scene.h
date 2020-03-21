@@ -292,13 +292,18 @@ public:
         activeConstraints.insert(activeConstraints.end(), collisionConstraints.begin(), collisionConstraints.end());
     }
 
-    void createGlobalMatrices(const double timeStep, const double _alpha, const double _beta)
+    void createGlobalMatrices(const double timeStep, const double alpha, const double beta)
     {
 
         /*************************
          * TODO: create the M, D, K matrices from alpha, beta, poisson ratio, and Young's modulus as learnt in class.
          * Afterward create the matrix "A" with the given timeStep that is the left hand side of the entire system.
          *********/
+
+        /******************
+         * Computing D, lecture 10, slide 28
+         */
+        D = alpha * M + beta * K;
 
         A = M + D * timeStep + K * (timeStep * timeStep);
 
