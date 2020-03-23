@@ -313,7 +313,9 @@ public:
         // I did not fully understand lecture 8 so I currently cannot implement this yet.
 
         /******************
-         * Computing M: Mass matrix, lecture 10, slide 27
+         * Computing M: Mass matrix
+         *  - lecture 6, slide 22
+         *  - lecture 10, slide 27
          */
         // Remove all values, but keep memory allocated
         M.setZero();
@@ -335,7 +337,10 @@ public:
         {
             // insert creates a new value and returns the reference.
             // We devide by 4 since the formula is mv = 1/4 SUM_i p_i V_i
-            M.insert(i, i) = mv[i] / 4;
+            int mid = i * 3;
+            M.insert(i + 0, i + 0) = mv[i] / 4;
+            M.insert(i + 1, i + 1) = mv[i] / 4;
+            M.insert(i + 2, i + 2) = mv[i] / 4;
         }
 
         /******************
@@ -471,7 +476,7 @@ public:
         assert(T.rows() * 4 == currPositions.rows() / 3);
 
         nr_vertices = invMasses.rows();
-        M = SparseMatrix<double>(nr_vertices, nr_vertices);
+        M = SparseMatrix<double>(nr_vertices * 3, nr_vertices * 3);
         K = SparseMatrix<double>(0, 0);
     }
 };
