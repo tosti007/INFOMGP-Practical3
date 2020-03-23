@@ -339,7 +339,26 @@ public:
          * K is a 3v × 3v matrix (lecture 10, slide 24)
          */
         // I did not fully understand lecture 8 so I currently cannot implement this yet.
+        K.setZero();
 
+        double youngs = 0;   // TODO
+        double poissons = 0; // TODO
+
+        // Create the stiffness tensor, lecture 10 slide 22
+        double mu = youngs / (2 * (1 + poissons));
+        double lambda = poissons * youngs / ((1 + poissons) * (1 - 2 * poissons));
+        for (int y = 0; y < 3; y++)
+            for (int x = 0; x < 3; x++)
+            {
+                if (x < 3 && y < 3)
+                    K.insert(x, y) = lambda;
+                if (x == y)
+                {
+                    K.coeffRef(x, y) += mu;
+                    if (x < 3)
+                        K.coeffRef(x, y) += mu;
+                }
+            }
     }
 
     void computeD(const double timeStep, const double alpha, const double beta)
@@ -494,7 +513,7 @@ public:
 
         nr_vertices = invMasses.rows();
         M = SparseMatrix<double>(nr_vertices * 3, nr_vertices * 3);
-        K = SparseMatrix<double>(0, 0);
+        K = SparseMatrix<double>(6, 6);
     }
 };
 
