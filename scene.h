@@ -317,6 +317,7 @@ public:
          */
         // Remove all values, but keep memory allocated
         M.setZero();
+        double mv[nr_vertices] = {0.0};
         // Since running through all vertices and taking the tets takes too long we loop over all tets and
         // take the vertices. Then update the value
         for (int tid = 0; tid < T.rows(); tid++)
@@ -326,12 +327,15 @@ public:
                 auto vid = T(tid, i);
                 auto p_i = density; // No idea if this is correct, but since there is no other denisty.
                 auto V_i = tetVolumes(tid);
-                // We devide by 4 since the actual formula is mv = 1/4 SUM_i p_i V_i
-                auto mv = p_i * V_i / 4;
-                // Create the M matrix from the mv values.
-                // coeffRef inserts a new value if it does not exist and returns a reference to that value.
-                M.coeffRef(vid, vid) += mv;
+                mv[vid] += p_i * V_i;
             }
+        }
+        // Create the M matrix from the mv values.
+        for (int i = 0; i < nr_vertices; i++)
+        {
+            // insert creates a new value and returns the reference.
+            // We devide by 4 since the formula is mv = 1/4 SUM_i p_i V_i
+            M.insert(i, i) = mv[i] / 4;
         }
 
         /******************
