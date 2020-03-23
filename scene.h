@@ -27,6 +27,9 @@ void center(const void *_obj, ccd_vec3_t *dir);
 class Mesh
 {
 public:
+    // Random constants
+    int nr_vertices;
+
     //position
     VectorXd origPositions; //3|V|x1 original vertex positions in xyzxyz format - never change this!
     VectorXd currPositions; //3|V|x1 current vertex positions in xyzxyz format
@@ -324,14 +327,12 @@ public:
                 auto p_i = density; // No idea if this is correct, but since there is no other denisty.
                 auto V_i = tetVolumes(tid);
                 // We devide by 4 since the actual formula is mv = 1/4 SUM_i p_i V_i
+                auto mv = p_i * V_i / 4;
+                // Create the M matrix from the mv values.
                 // coeffRef inserts a new value if it does not exist and returns a reference to that value.
-                M.coeffRef(vid, 0) += p_i * V_i / 4;
+                M.coeffRef(vid, vid) += mv;
             }
         }
-        // The slides also say the formula below, as we currently only obtained the mv, but I have no idea what this means.
-        // Considering we have a M = |V|x1 matrix I am assuming we still need to do something.
-        // If this is the case we should change the updating of the value M above to an array as the vertex indices are 0 to N.
-        // M = Diag(m3×3) per vertex
 
         /******************
          * Computing D: Damping matrix, lecture 10, slide 28
@@ -465,9 +466,8 @@ public:
         // of vertices?!?!?!?
         assert(T.rows() * 4 == currPositions.rows() / 3);
 
-        // Added for performance
-        // Note that T.rows is not the actual amount of vertices, but it will give atleast somewhat of an estimation.
-        M = SparseMatrix<double>(T.rows() / 2, 1);
+        nr_vertices = invMasses.rows();
+        M = SparseMatrix<double>(nr_vertices, nr_vertices);
         K = SparseMatrix<double>(0, 0);
     }
 };
