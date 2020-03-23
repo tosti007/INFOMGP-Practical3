@@ -296,22 +296,8 @@ public:
         activeConstraints.insert(activeConstraints.end(), collisionConstraints.begin(), collisionConstraints.end());
     }
 
-    void createGlobalMatrices(const double timeStep, const double alpha, const double beta)
+    void computeM(const double timeStep, const double alpha, const double beta)
     {
-
-        /*************************
-         * TODO: create the M, D, K matrices from alpha, beta, poisson ratio, and Young's modulus as learnt in class.
-         * Afterward create the matrix "A" with the given timeStep that is the left hand side of the entire system.
-         *********/
-
-        /******************
-         * Computing K: Stiffnes matrix,
-         *   - lecture 8, slide 6, 9, 11, 15, 19
-         *   - lecture 10, slide 28
-         * K is a 3v × 3v matrix (lecture 10, slide 24)
-         */
-        // I did not fully understand lecture 8 so I currently cannot implement this yet.
-
         /******************
          * Computing M: Mass matrix
          *  - lecture 6, slide 22
@@ -342,13 +328,44 @@ public:
             M.insert(i + 1, i + 1) = mv[i] / 4;
             M.insert(i + 2, i + 2) = mv[i] / 4;
         }
+    }
 
+    void computeK(const double timeStep, const double alpha, const double beta)
+    {
+        /******************
+         * Computing K: Stiffnes matrix,
+         *   - lecture 8, slide 6, 9, 11, 15, 19
+         *   - lecture 10, slide 28
+         * K is a 3v × 3v matrix (lecture 10, slide 24)
+         */
+        // I did not fully understand lecture 8 so I currently cannot implement this yet.
+
+    }
+
+    void computeD(const double timeStep, const double alpha, const double beta)
+    {
         /******************
          * Computing D: Damping matrix, lecture 10, slide 28
          */
         D = alpha * M + beta * K;
+    }
 
+    void computeA(const double timeStep, const double alpha, const double beta)
+    {
         A = M + D * timeStep + K * (timeStep * timeStep);
+    }
+
+    void createGlobalMatrices(const double timeStep, const double alpha, const double beta)
+    {
+
+        /*************************
+         * TODO: create the M, D, K matrices from alpha, beta, poisson ratio, and Young's modulus as learnt in class.
+         * Afterward create the matrix "A" with the given timeStep that is the left hand side of the entire system.
+         *********/
+        computeM(timeStep, alpha, beta);
+        computeK(timeStep, alpha, beta);
+        computeD(timeStep, alpha, beta);
+        computeA(timeStep, alpha, beta);
 
         //Should currently fail since A is empty
         if (ASolver == NULL)
