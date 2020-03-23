@@ -305,7 +305,7 @@ public:
          *********/
 
         /******************
-         * Computing K: Stiffnes matrix, 
+         * Computing K: Stiffnes matrix,
          *   - lecture 8, slide 6, 9, 11, 15, 19
          *   - lecture 10, slide 28
          * K is a 3v × 3v matrix (lecture 10, slide 24)
@@ -656,17 +656,17 @@ public:
     }
 
     /*void setPlatformBarriers(const MatrixXd& platV, const double CRCoeff){
-    
+
     RowVector3d minPlatform=platV.colwise().minCoeff();
     RowVector3d maxPlatform=platV.colwise().maxCoeff();
-    
+
     //y value of maxPlatform is lower bound
     for (int i=1;i<globalPositions.size();i+=3){
       VectorXi coordIndices(1); coordIndices(0)=i;
       VectorXd constraintInvMasses(1); constraintInvMasses(0)=globalInvMasses(i);
       barrierConstraints.push_back(Constraint(BARRIER, INEQUALITY, coordIndices, constraintInvMasses, MatrixXd::Zero(1,1), maxPlatform(1),CRCoeff));
     }
-    
+
   }*/
 
     //adding an object.
