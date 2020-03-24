@@ -347,16 +347,19 @@ public:
         // Create the stiffness tensor, lecture 10 slide 22
         double mu = youngs / (2 * (1 + poissons));
         double lambda = poissons * youngs / ((1 + poissons) * (1 - 2 * poissons));
+
+        // L10S22, C is the stiffness tensor, not the stiffness matrix
+        auto C = SparseMatrix<double>(6, 6);
         for (int y = 0; y < 3; y++)
             for (int x = 0; x < 3; x++)
             {
                 if (x < 3 && y < 3)
-                    K.insert(x, y) = lambda;
+                    C.insert(x, y) = lambda;
                 if (x == y)
                 {
-                    K.coeffRef(x, y) += mu;
+                    C.coeffRef(x, y) += mu;
                     if (x < 3)
-                        K.coeffRef(x, y) += mu;
+                        C.coeffRef(x, y) += mu;
                 }
             }
     }
@@ -513,7 +516,7 @@ public:
 
         nr_vertices = invMasses.rows();
         M = SparseMatrix<double>(nr_vertices * 3, nr_vertices * 3);
-        K = SparseMatrix<double>(6, 6);
+        K = SparseMatrix<double>(12, 12);
     }
 };
 
