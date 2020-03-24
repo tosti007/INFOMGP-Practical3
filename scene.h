@@ -369,7 +369,7 @@ public:
         /******************
          * Computing D: Damping matrix, lecture 10, slide 28
          */
-        D = alpha * M + beta * K;
+        D = alpha * M + beta * Kappa;
     }
 
     void computeA(const double timeStep, const double alpha, const double beta)
