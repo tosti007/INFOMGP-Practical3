@@ -311,7 +311,9 @@ public:
          */
         // Remove all values, but keep memory allocated
         M.setZero();
-        double mv[nr_vertices] = {0.0};
+        double mv[nr_vertices];
+        for (int i = 0; i < nr_vertices; i++)
+            mv[i] = 0;
         // Since running through all vertices and taking the tets takes too long we loop over all tets and
         // take the vertices. Then update the value
         for (int tid = 0; tid < T.rows(); tid++)
