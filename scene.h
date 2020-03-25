@@ -324,9 +324,10 @@ public:
             // insert creates a new value and returns the reference.
             // We devide by 4 since the formula is mv = 1/4 SUM_i p_i V_i
             int mid = i * 3;
-            M.insert(i + 0, i + 0) = mv[i] / 4;
-            M.insert(i + 1, i + 1) = mv[i] / 4;
-            M.insert(i + 2, i + 2) = mv[i] / 4;
+            double mi = mv[i] / 4;
+            M.insert(i + 0, i + 0) = mi;
+            M.insert(i + 1, i + 1) = mi;
+            M.insert(i + 2, i + 2) = mi;
         }
     }
 
