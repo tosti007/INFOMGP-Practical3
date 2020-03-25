@@ -506,6 +506,7 @@ public:
 
         nr_vertices = invMasses.rows();
         M = SparseMatrix<double>(nr_vertices * 3, nr_vertices * 3);
+        M.reserve(nr_vertices * 3);
         K = SparseMatrix<double>(12, 12);
     }
 };
