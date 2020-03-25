@@ -318,11 +318,11 @@ public:
         // take the vertices. Then update the value
         for (int tid = 0; tid < T.rows(); tid++)
         {
+            auto p_i = density; // No idea if this is correct, but since there is no other denisty.
+            auto V_i = tetVolumes(tid);
             for (int i = 0; i < 4; i++)
             {
                 auto vid = T(tid, i);
-                auto p_i = density; // No idea if this is correct, but since there is no other denisty.
-                auto V_i = tetVolumes(tid);
                 mv[vid] += p_i * V_i;
             }
         }
