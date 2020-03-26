@@ -502,9 +502,10 @@ public:
         // BUT these vertices are duplicates of one another as the vertices are reused. So we have less than rows/4 vertices.
         // So why does the actual amount of positions (devided by 3 since they have 3 values each) differ from the actual amount
         // of vertices?!?!?!?
-        assert(T.rows() * 4 == currPositions.rows() / 3);
-
         nr_vertices = invMasses.rows();
+        assert(nr_vertices == origPositions.rows() / 3);
+        assert(nr_vertices == T.rows() * 4);
+
         M = SparseMatrix<double>(nr_vertices * 3, nr_vertices * 3);
         M.reserve(nr_vertices * 3);
         Kappa = SparseMatrix<double>(nr_vertices * 3, nr_vertices * 3);
