@@ -49,7 +49,7 @@ public:
 
     double youngModulus, poissonRatio, density, alpha, beta;
 
-    SparseMatrix<double> A, K, M, D; //The soft-body matrices
+    SparseMatrix<double> A, Kappa, M, D; //The soft-body matrices
 
     SimplicialLLT<SparseMatrix<double>> *ASolver; //the solver for the left-hand side matrix constructed for FEM
 
@@ -339,13 +339,13 @@ public:
         }
 
         /******************
-         * Computing K: Stiffnes matrix,
+         * Computing Kappa: Stiffnes matrix,
          *   - lecture 8, slide 6, 9, 11, 15, 19
          *   - lecture 10, slide 28
          * K is a 3v × 3v matrix (lecture 10, slide 24)
          */
         // I did not fully understand lecture 8 so I currently cannot implement this yet.
-        K.setZero();
+        Kappa.setZero();
 
         double youngs = 0;   // TODO
         double poissons = 0; // TODO
@@ -377,7 +377,7 @@ public:
         /******************
          * Computing A, implementation given
          */
-        A = M + D * timeStep + K * (timeStep * timeStep);
+        A = M + D * timeStep + Kappa * (timeStep * timeStep);
 
         //Should currently fail since A is empty
         if (ASolver == NULL)
@@ -507,7 +507,7 @@ public:
         nr_vertices = invMasses.rows();
         M = SparseMatrix<double>(nr_vertices * 3, nr_vertices * 3);
         M.reserve(nr_vertices * 3);
-        K = SparseMatrix<double>(12, 12);
+        Kappa = SparseMatrix<double>(nr_vertices * 3, nr_vertices * 3);
     }
 };
 
