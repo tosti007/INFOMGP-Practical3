@@ -358,6 +358,13 @@ public:
 			M.insert(i + 2, i + 2) = mi;
 		}
 
+		/******************
+		 * Computing Kappa: Stiffnes matrix,
+		 *   - lecture 8, slide 6, 9, 11, 15, 19
+		 *   - lecture 10, slide 28
+		 * K is a 3v × 3v matrix (lecture 10, slide 24)
+		 */
+
 		// Create the stiffness tensor, lecture 10 slide 22
 		double mu = youngModulus / (2 * (1 + poissonRatio));
 		double lambda = poissonRatio * youngModulus / ((1 + poissonRatio) * (1 - 2 * poissonRatio));
@@ -376,13 +383,6 @@ public:
 						C.coeffRef(x, y) += mu;
 				}
 			}
-
-		/******************
-		 * Computing Kappa: Stiffnes matrix,
-		 *   - lecture 8, slide 6, 9, 11, 15, 19
-		 *   - lecture 10, slide 28
-		 * K is a 3v × 3v matrix (lecture 10, slide 24)
-		 */
 
 		// first calculate Pe
 		std::vector<Matrix<double, 4, 4>> Pe;
