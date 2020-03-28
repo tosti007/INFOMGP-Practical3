@@ -384,15 +384,16 @@ public:
 		 // first calculate Pe
 		std::vector<Matrix<double, 4, 4>> Pe;
 		Pe.reserve(T.rows());
-		for (int i = 0; i < T.rows(); i++)
+		for (int tid = 0; tid < nr_vertices; tid++)
 		{
 			Matrix<double, 4, 4> Pe_i;
 			for (int j = 0; j < 4; j++)
 			{
-				Pe_i(j, 0) = 1.0;
-				Pe_i(j, 1) = origPositions[3 * T(i, j) + 0];
-				Pe_i(j, 1) = origPositions[3 * T(i, j) + 1];
-				Pe_i(j, 1) = origPositions[3 * T(i, j) + 2];
+				int vid = 3 * T(tid, j);
+				Pe[tid](j, 0) = 1.0;
+				Pe[tid](j, 1) = origPositions[vid + 0];
+				Pe[tid](j, 2) = origPositions[vid + 1];
+				Pe[tid](j, 3) = origPositions[vid + 2];
 			}
 			Pe.push_back(Pe_i);
 		}
