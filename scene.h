@@ -298,7 +298,7 @@ public:
 
     SparseMatrix<double> GetConstD()
     {
-        auto D_const = SparseMatrix<double>(9, 6);
+        auto D_const = SparseMatrix<double>(6, 9);
         D_const.insert(0, 0) = 1;
         D_const.insert(4, 1) = 1;
         D_const.insert(8, 2) = 1;
@@ -386,17 +386,19 @@ public:
 		Pe.reserve(T.rows());
 		for (int i = 0; i < T.rows(); i++)
 		{
+			Matrix<double, 4, 4> Pe_i;
 			for (int j = 0; j < 4; j++)
 			{
-				Pe[i](j, 0) = 1.0;
-				Pe[i](j, 1) = origPositions[3 * T(i, j) + 0];
-				Pe[i](j, 1) = origPositions[3 * T(i, j) + 1];
-				Pe[i](j, 1) = origPositions[3 * T(i, j) + 2];
+				Pe_i(j, 0) = 1.0;
+				Pe_i(j, 1) = origPositions[3 * T(i, j) + 0];
+				Pe_i(j, 1) = origPositions[3 * T(i, j) + 1];
+				Pe_i(j, 1) = origPositions[3 * T(i, j) + 2];
 			}
+			Pe.push_back(Pe_i);
 		}
 
 		// then calculate Ge
-		std::vector<Matrix<double, 4, 3>> Ge;
+		std::vector<Matrix<double, 3, 4>> Ge;
 		Ge.reserve(T.rows());
 		Matrix<double, 3, 4> Imat;
 		Imat << 0, 1, 0, 0,
@@ -404,7 +406,7 @@ public:
 			0, 0, 0, 1;
 		for (int i = 0; i < T.rows(); i++)
 		{
-			Ge[i] = Imat * Pe[i].inverse();
+			Ge.push_back(Imat * Pe[i].inverse());
 		}
 
 		// then calculate Je
@@ -412,13 +414,14 @@ public:
 		Je.reserve(T.rows());
 		for (int i = 0; i < T.rows(); i++)
 		{
-			Je[i] = SparseMatrix<double>(12, 9);
+			SparseMatrix<double> Je_i(9, 12);
 			for (int x = 0; x < 4; x++) for (int y = 0; y < 3; y++)
 			{
-				Je[i].insert(0 + x, 0 + y) = Ge[i](x, y);
-				Je[i].insert(4 + x, 3 + y) = Ge[i](x, y);
-				Je[i].insert(8 + x, 6 + y) = Ge[i](x, y);
+				Je_i.insert(0 + y, 0 + x) = Ge[i](y, x);
+				Je_i.insert(3 + y, 4 + x) = Ge[i](y, x);
+				Je_i.insert(6 + y, 8 + x) = Ge[i](y, x);
 			}
+			Je.push_back(Je_i);
 		}
 
 		// then calculate Be
@@ -427,18 +430,18 @@ public:
 		auto constD = GetConstD();
 		for (int i = 0; i < T.rows(); i++)
 		{
-			Be[i] = SparseMatrix<double>(9, 9); // er klopt hier iets niet bij de grootte
-			Be[i] = constD * Je[i];
+			SparseMatrix<double> Be_i(6, 12);
+			Be_i = constD * Je[i]; // ik snap niet waarom maar dit gaat fout, de groottes van de matrices zouden compatibel moeten zijn
+			Be.push_back(Be_i);
 		}
 
 		// then calculate Ke
-		std::vector<SparseMatrix<double>> Ke;
+		/*std::vector<SparseMatrix<double>> Ke;
 		Ke.reserve(T.rows());
-		auto constD = GetConstD();
 		for (int i = 0; i < T.rows(); i++)
 		{
 			Ke[i] = Be[i].transpose() * C * Be[i];
-		}
+		}*/
 
 		// nu alle Ke in één grote SparseMatrix K' zetten
 
