@@ -386,7 +386,7 @@ public:
 
 		// first calculate Pe
 		std::vector<Matrix<double, 4, 4>> Pe;
-		Pe.reserve(T.rows());
+		Pe.reserve(nr_vertices);
 		for (int tid = 0; tid < nr_vertices; tid++)
 		{
 			Matrix<double, 4, 4> Pe_i;
@@ -403,20 +403,20 @@ public:
 
 		// then calculate Ge
 		std::vector<Matrix<double, 3, 4>> Ge;
-		Ge.reserve(T.rows());
+		Ge.reserve(nr_vertices);
 		Matrix<double, 3, 4> Imat;
 		Imat << 0, 1, 0, 0,
 			0, 0, 1, 0,
 			0, 0, 0, 1;
-		for (int i = 0; i < T.rows(); i++)
+		for (int i = 0; i < nr_vertices; i++)
 		{
 			Ge.push_back(Imat * Pe[i].inverse());
 		}
 
 		// then calculate Je
 		std::vector<SparseMatrix<double>> Je;
-		Je.reserve(T.rows());
-		for (int i = 0; i < T.rows(); i++)
+		Je.reserve(nr_vertices);
+		for (int i = 0; i < nr_vertices; i++)
 		{
 			SparseMatrix<double> Je_i(9, 12);
 			for (int x = 0; x < 4; x++)
@@ -431,9 +431,9 @@ public:
 
 		// then calculate Be
 		std::vector<SparseMatrix<double>> Be;
-		Be.reserve(T.rows());
+		Be.reserve(nr_vertices);
 		auto constD = GetConstD();
-		for (int i = 0; i < T.rows(); i++)
+		for (int i = 0; i < nr_vertices; i++)
 		{
 			SparseMatrix<double> Be_i(6, 12);
 			Be_i = constD * Je[i]; // ik snap niet waarom maar dit gaat fout, de groottes van de matrices zouden compatibel moeten zijn
@@ -442,8 +442,8 @@ public:
 
 		// then calculate Ke
 		/*std::vector<SparseMatrix<double>> Ke;
-		Ke.reserve(T.rows());
-		for (int i = 0; i < T.rows(); i++)
+		Ke.reserve(nr_vertices);
+		for (int i = 0; i < nr_vertices; i++)
 		{
 			Ke[i] = Be[i].transpose() * C * Be[i];
 		}*/
