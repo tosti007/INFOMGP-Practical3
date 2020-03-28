@@ -355,24 +355,24 @@ public:
             M.insert(i + 2, i + 2) = mi;
         }
 
-		// Create the stiffness tensor, lecture 10 slide 22
-		double mu = youngModulus / (2 * (1 + poissonRatio));
-		double lambda = poissonRatio * youngModulus / ((1 + poissonRatio) * (1 - 2 * poissonRatio));
+        // Create the stiffness tensor, lecture 10 slide 22
+        double mu = youngModulus / (2 * (1 + poissonRatio));
+        double lambda = poissonRatio * youngModulus / ((1 + poissonRatio) * (1 - 2 * poissonRatio));
 
-		// L10S22, C is the stiffness tensor, not the stiffness matrix
-		auto C = SparseMatrix<double>(6, 6);
-		for (int y = 0; y < 3; y++)
-			for (int x = 0; x < 3; x++)
-			{
-				if (x < 3 && y < 3)
-					C.insert(x, y) = lambda;
-				if (x == y)
-				{
-					C.coeffRef(x, y) += mu;
-					if (x < 3)
-						C.coeffRef(x, y) += mu;
-				}
-			}
+        // L10S22, C is the stiffness tensor, not the stiffness matrix
+        auto C = SparseMatrix<double>(6, 6);
+        for (int y = 0; y < 3; y++)
+            for (int x = 0; x < 3; x++)
+            {
+                if (x < 3 && y < 3)
+                    C.insert(x, y) = lambda;
+                if (x == y)
+                {
+                    C.coeffRef(x, y) += mu;
+                    if (x < 3)
+                        C.coeffRef(x, y) += mu;
+                }
+            }
 
         /******************
          * Computing Kappa: Stiffnes matrix,
@@ -381,74 +381,74 @@ public:
          * K is a 3v × 3v matrix (lecture 10, slide 24)
          */
 
-		// first calculate Pe
-		std::vector<Matrix<double, 4, 4>> Pe;
-		Pe.reserve(T.rows());
-		for (int i = 0; i < T.rows(); i++)
-		{
-			for (int j = 0; j < 4; j++)
-			{
-				Pe[i](j, 0) = 1.0;
-				Pe[i](j, 1) = origPositions[3 * T(i, j) + 0];
-				Pe[i](j, 1) = origPositions[3 * T(i, j) + 1];
-				Pe[i](j, 1) = origPositions[3 * T(i, j) + 2];
-			}
-		}
+        // first calculate Pe
+        std::vector<Matrix<double, 4, 4>> Pe;
+        Pe.reserve(T.rows());
+        for (int i = 0; i < T.rows(); i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                Pe[i](j, 0) = 1.0;
+                Pe[i](j, 1) = origPositions[3 * T(i, j) + 0];
+                Pe[i](j, 1) = origPositions[3 * T(i, j) + 1];
+                Pe[i](j, 1) = origPositions[3 * T(i, j) + 2];
+            }
+        }
 
-		// then calculate Ge
-		std::vector<Matrix<double, 4, 3>> Ge;
-		Ge.reserve(T.rows());
-		Matrix<double, 3, 4> Imat;
-		Imat << 0, 1, 0, 0,
-			0, 0, 1, 0,
-			0, 0, 0, 1;
-		for (int i = 0; i < T.rows(); i++)
-		{
-			Ge[i] = Imat * Pe[i].inverse();
-		}
+        // then calculate Ge
+        std::vector<Matrix<double, 4, 3>> Ge;
+        Ge.reserve(T.rows());
+        Matrix<double, 3, 4> Imat;
+        Imat << 0, 1, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1;
+        for (int i = 0; i < T.rows(); i++)
+        {
+            Ge[i] = Imat * Pe[i].inverse();
+        }
 
-		// then calculate Je
-		std::vector<SparseMatrix<double>> Je;
-		Je.reserve(T.rows());
-		for (int i = 0; i < T.rows(); i++)
-		{
-			Je[i] = SparseMatrix<double>(12, 9);
-			for (int x = 0; x < 4; x++) for (int y = 0; y < 3; y++)
-			{
-				Je[i].insert(0 + x, 0 + y) = Ge[i](x, y);
-				Je[i].insert(4 + x, 3 + y) = Ge[i](x, y);
-				Je[i].insert(8 + x, 6 + y) = Ge[i](x, y);
-			}
-		}
+        // then calculate Je
+        std::vector<SparseMatrix<double>> Je;
+        Je.reserve(T.rows());
+        for (int i = 0; i < T.rows(); i++)
+        {
+            Je[i] = SparseMatrix<double>(12, 9);
+            for (int x = 0; x < 4; x++)
+                for (int y = 0; y < 3; y++)
+                {
+                    Je[i].insert(0 + x, 0 + y) = Ge[i](x, y);
+                    Je[i].insert(4 + x, 3 + y) = Ge[i](x, y);
+                    Je[i].insert(8 + x, 6 + y) = Ge[i](x, y);
+                }
+        }
 
-		// then calculate Be
-		std::vector<SparseMatrix<double>> Be;
-		Be.reserve(T.rows());
-		auto constD = GetConstD();
-		for (int i = 0; i < T.rows(); i++)
-		{
-			Be[i] = SparseMatrix<double>(9, 9); // er klopt hier iets niet bij de grootte
-			Be[i] = constD * Je[i];
-		}
+        // then calculate Be
+        std::vector<SparseMatrix<double>> Be;
+        Be.reserve(T.rows());
+        auto constD = GetConstD();
+        for (int i = 0; i < T.rows(); i++)
+        {
+            Be[i] = SparseMatrix<double>(9, 9); // er klopt hier iets niet bij de grootte
+            Be[i] = constD * Je[i];
+        }
 
-		// then calculate Ke
-		std::vector<SparseMatrix<double>> Ke;
-		Ke.reserve(T.rows());
-		auto constD = GetConstD();
-		for (int i = 0; i < T.rows(); i++)
-		{
-			Ke[i] = Be[i].transpose() * C * Be[i];
-		}
+        // then calculate Ke
+        std::vector<SparseMatrix<double>> Ke;
+        Ke.reserve(T.rows());
+        auto constD = GetConstD();
+        for (int i = 0; i < T.rows(); i++)
+        {
+            Ke[i] = Be[i].transpose() * C * Be[i];
+        }
 
-		// nu alle Ke in één grote SparseMatrix K' zetten
+        // nu alle Ke in één grote SparseMatrix K' zetten
 
-		// Q berekenen
+        // Q berekenen
 
-		// K = Q^T * K' * Q
+        // K = Q^T * K' * Q
 
         // I did not fully understand lecture 8 so I currently cannot implement this yet.
         Kappa.setZero();
-
 
         /******************
          * Computing D: Damping matrix, lecture 10, slide 28
