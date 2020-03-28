@@ -35,15 +35,15 @@ public:
 	VectorXd currPositions; //3|V|x1 current vertex positions in xyzxyz format
 
 	//kinematics
-	bool isFixed;            //is the object immobile (infinite mass)
+	bool isFixed;			 //is the object immobile (infinite mass)
 	VectorXd currVelocities; //3|V|x1 velocities per coordinate in xyzxyz format.
 
-	MatrixXi T;              //|T|x4 tetrahdra
-	MatrixXi F;              //|F|x3 boundary faces
-	VectorXd invMasses;      //|V|x1 inverse masses of vertices, computed in the beginning as 1.0/(density * vertex voronoi area)
+	MatrixXi T;				 //|T|x4 tetrahdra
+	MatrixXi F;				 //|F|x3 boundary faces
+	VectorXd invMasses;		 //|V|x1 inverse masses of vertices, computed in the beginning as 1.0/(density * vertex voronoi area)
 	VectorXd voronoiVolumes; //|V|x1 the voronoi volume of vertices
-	VectorXd tetVolumes;     //|T|x1 tetrahedra volumes
-	int globalOffset;        //the global index offset of the of opositions/velocities/impulses from the beginning of the global coordinates array in the containing scene class
+	VectorXd tetVolumes;	 //|T|x1 tetrahedra volumes
+	int globalOffset;		 //the global index offset of the of opositions/velocities/impulses from the beginning of the global coordinates array in the containing scene class
 
 	VectorXi boundTets; //just the boundary tets, for collision
 
@@ -77,14 +77,15 @@ public:
 			XMax2 = XMax2.array().max(m2.currPositions.segment(i, 3).array().transpose());
 		}
 
-		/*double rmax1=vertexSphereRadii.maxCoeff();
-	 double rmax2=m2.vertexSphereRadii.maxCoeff();
-	 XMin1.array()-=rmax1;
-	 XMax1.array()+=rmax1;
-	 XMin2.array()-=rmax2;
-	 XMax2.array()+=rmax2;*/
+		/*
+		double rmax1=vertexSphereRadii.maxCoeff();
+	 	double rmax2=m2.vertexSphereRadii.maxCoeff();
+	 	XMin1.array()-=rmax1;
+	 	XMax1.array()+=rmax1;
+	 	XMin2.array()-=rmax2;
+	 	XMax2.array()+=rmax2;*/
 
-	 //checking all axes for non-intersection of the dimensional interval
+		//checking all axes for non-intersection of the dimensional interval
 		for (int i = 0; i < 3; i++)
 			if ((XMax1(i) < XMin2(i)) || (XMax2(i) < XMin1(i)))
 				return false;
@@ -114,10 +115,12 @@ public:
 			return;
 
 		//creating tet spheres
-		/*MatrixXd c1(T.rows(), 3);
-	 MatrixXd c2(m.T.rows(), 3);
-	 VectorXd r1(T.rows());
-	 VectorXd r2(m.T.rows());*/
+		/*
+		MatrixXd c1(T.rows(), 3);
+		MatrixXd c2(m.T.rows(), 3);
+		VectorXd r1(T.rows());
+		VectorXd r2(m.T.rows());
+	 	*/
 
 		MatrixXd maxs1(boundTets.rows(), 3);
 		MatrixXd mins1(boundTets.rows(), 3);
@@ -319,12 +322,12 @@ public:
 		 * Afterward create the matrix "A" with the given timeStep that is the left hand side of the entire system.
 		 *********/
 
-		 /******************
+		/******************
 		  * Computing M: Mass matrix
 		  *  - lecture 6, slide 22
 		  *  - lecture 10, slide 27
 		  */
-		  // Remove all values, but keep memory allocated
+		// Remove all values, but keep memory allocated
 		M.setZero();
 		std::vector<double> mv;
 		mv.reserve(nr_vertices);
@@ -381,7 +384,7 @@ public:
 		 * K is a 3v × 3v matrix (lecture 10, slide 24)
 		 */
 
-		 // first calculate Pe
+		// first calculate Pe
 		std::vector<Matrix<double, 4, 4>> Pe;
 		Pe.reserve(T.rows());
 		for (int tid = 0; tid < nr_vertices; tid++)
@@ -416,12 +419,13 @@ public:
 		for (int i = 0; i < T.rows(); i++)
 		{
 			SparseMatrix<double> Je_i(9, 12);
-			for (int x = 0; x < 4; x++) for (int y = 0; y < 3; y++)
-			{
-				Je_i.insert(0 + y, 0 + x) = Ge[i](y, x);
-				Je_i.insert(3 + y, 4 + x) = Ge[i](y, x);
-				Je_i.insert(6 + y, 8 + x) = Ge[i](y, x);
-			}
+			for (int x = 0; x < 4; x++)
+				for (int y = 0; y < 3; y++)
+				{
+					Je_i.insert(0 + y, 0 + x) = Ge[i](y, x);
+					Je_i.insert(3 + y, 4 + x) = Ge[i](y, x);
+					Je_i.insert(6 + y, 8 + x) = Ge[i](y, x);
+				}
 			Je.push_back(Je_i);
 		}
 
@@ -452,7 +456,6 @@ public:
 
 		// I did not fully understand lecture 8 so I currently cannot implement this yet.
 		Kappa.setZero();
-
 
 		/******************
 		 * Computing D: Damping matrix, lecture 10, slide 28
@@ -609,11 +612,11 @@ public:
 	VectorXd globalPositions;  //3*|V| all positions
 	VectorXd globalVelocities; //3*|V| all velocities
 	VectorXd globalInvMasses;  //3*|V| all inverse masses  (NOTE: the invMasses in the Mesh class is |v| (one per vertex)!
-	MatrixXi globalT;          //|T|x4 tetraheda in global index
+	MatrixXi globalT;		   //|T|x4 tetraheda in global index
 
 	vector<Mesh> meshes;
 
-	vector<Constraint> userConstraints;    //provided from the scene
+	vector<Constraint> userConstraints;	   //provided from the scene
 	vector<Constraint> barrierConstraints; //provided by the platform
 
 	//updates from global values back into mesh values
@@ -785,7 +788,7 @@ public:
 
   }*/
 
-  //adding an object.
+	//adding an object.
 	void addMesh(const MatrixXd &V, const MatrixXi &boundF, const MatrixXi &T, const double youngModulus, const double PoissonRatio, const double density, const bool isFixed, const RowVector3d &userCOM, const RowVector4d userOrientation)
 	{
 
