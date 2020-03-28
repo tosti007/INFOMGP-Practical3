@@ -347,12 +347,9 @@ public:
         // I did not fully understand lecture 8 so I currently cannot implement this yet.
         Kappa.setZero();
 
-        double youngs = 0;   // TODO
-        double poissons = 0; // TODO
-
         // Create the stiffness tensor, lecture 10 slide 22
-        double mu = youngs / (2 * (1 + poissons));
-        double lambda = poissons * youngs / ((1 + poissons) * (1 - 2 * poissons));
+        double mu = youngModulus / (2 * (1 + poissonRatio));
+        double lambda = poissonRatio * youngModulus / ((1 + poissonRatio) * (1 - 2 * poissonRatio));
 
         // L10S22, C is the stiffness tensor, not the stiffness matrix
         auto C = SparseMatrix<double>(6, 6);
