@@ -383,8 +383,8 @@ public:
 
         // first calculate Pe
         std::vector<Matrix<double, 4, 4>> Pe;
-        Pe.reserve(T.rows());
-        for (int i = 0; i < T.rows(); i++)
+        Pe.reserve(nr_vertices);
+        for (int i = 0; i < nr_vertices; i++)
         {
             for (int j = 0; j < 4; j++)
             {
