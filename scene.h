@@ -311,7 +311,9 @@ public:
          */
         // Remove all values, but keep memory allocated
         M.setZero();
-        double mv[nr_vertices];
+		std::vector<double> mv;
+		mv.reserve(nr_vertices);
+        //double mv[nr_vertices];
         for (int i = 0; i < nr_vertices; i++)
             mv[i] = 0;
         // Since running through all vertices and taking the tets takes too long we loop over all tets and
