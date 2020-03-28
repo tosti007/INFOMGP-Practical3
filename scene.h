@@ -296,6 +296,21 @@ public:
         activeConstraints.insert(activeConstraints.end(), collisionConstraints.begin(), collisionConstraints.end());
     }
 
+    SparseMatrix<double> GetConstD()
+    {
+        auto D_const = SparseMatrix<double>(9, 6);
+        D_const.insert(0, 0) = 1;
+        D_const.insert(4, 1) = 1;
+        D_const.insert(8, 2) = 1;
+        D_const.insert(1, 3) = 0.5;
+        D_const.insert(3, 3) = 0.5;
+        D_const.insert(5, 4) = 0.5;
+        D_const.insert(7, 4) = 0.5;
+        D_const.insert(2, 5) = 0.5;
+        D_const.insert(6, 5) = 0.5;
+        return D_const;
+    }
+
     void createGlobalMatrices(const double timeStep, const double alpha, const double beta)
     {
 
@@ -311,8 +326,8 @@ public:
          */
         // Remove all values, but keep memory allocated
         M.setZero();
-		std::vector<double> mv;
-		mv.reserve(nr_vertices);
+        std::vector<double> mv;
+        mv.reserve(nr_vertices);
         //double mv[nr_vertices];
         for (int i = 0; i < nr_vertices; i++)
             mv[i] = 0;
