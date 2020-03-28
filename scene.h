@@ -435,7 +435,6 @@ public:
         // then calculate Ke
         std::vector<SparseMatrix<double>> Ke;
         Ke.reserve(T.rows());
-        auto constD = GetConstD();
         for (int i = 0; i < T.rows(); i++)
         {
             Ke[i] = Be[i].transpose() * C * Be[i];
