@@ -432,12 +432,12 @@ public:
 
 		// then calculate Be
 		std::vector<SparseMatrix<double>> Be;
-		Be.reserve(nr_vertices);
+		Be.reserve(nr_tets);
 		auto constD = GetConstD();
-		for (int i = 0; i < nr_vertices; i++)
+		for (int tid = 0; tid < nr_tets; tid++)
 		{
 			SparseMatrix<double> Be_i(6, 12);
-			Be_i = constD * Je[i]; // ik snap niet waarom maar dit gaat fout, de groottes van de matrices zouden compatibel moeten zijn
+			Be_i = constD * Je[tid]; // ik snap niet waarom maar dit gaat fout, de groottes van de matrices zouden compatibel moeten zijn
 			Be.push_back(Be_i);
 		}
 
