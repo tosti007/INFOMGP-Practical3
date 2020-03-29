@@ -29,6 +29,7 @@ class Mesh
 public:
 	// Random constants
 	int nr_vertices;
+	int nr_tets;
 
 	//position
 	VectorXd origPositions; //3|V|x1 original vertex positions in xyzxyz format - never change this!
@@ -590,6 +591,7 @@ public:
 		// So why does the actual amount of positions (devided by 3 since they have 3 values each) differ from the actual amount
 		// of vertices?!?!?!?
 		nr_vertices = invMasses.rows();
+		nr_tets = T.rows();
 		assert(nr_vertices == origPositions.rows() / 3);
 		assert(nr_vertices == T.rows() * 4);
 
