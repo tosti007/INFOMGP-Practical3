@@ -474,7 +474,8 @@ public:
 				for (int coord = 0; coord < 3; coord++)
 				{
 					int old_pos = 3 * vid + coord;          // position in vector that is the input to Q
-					int new_pos = 12 * tid + 3 * j + coord; // position in vector that Q constructs
+					int new_pos = 12 * tid + 4 * coord + j; // position in vector that Q constructs
+
 					Q.insert(new_pos, old_pos) = 1;
 				}
 			}
