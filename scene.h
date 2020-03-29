@@ -393,11 +393,11 @@ public:
 			Matrix<double, 4, 4> Pe_i;
 			for (int j = 0; j < 4; j++)
 			{
-				int vid = 3 * T(tid, j);
+				int vid = T(tid, j);
 				Pe_i(j, 0) = 1.0;
-				Pe_i(j, 1) = origPositions[vid + 0];
-				Pe_i(j, 2) = origPositions[vid + 1];
-				Pe_i(j, 3) = origPositions[vid + 2];
+				Pe_i(j, 1) = origPositions[3 * vid + 0];
+				Pe_i(j, 2) = origPositions[3 * vid + 1];
+				Pe_i(j, 3) = origPositions[3 * vid + 2];
 			}
 			Pe.push_back(Pe_i);
 		}
@@ -482,9 +482,6 @@ public:
 
 		// K = Q^T * K' * Q
 		Kappa = (Q.transpose() * Kprime) * Q;
-
-		// I did not fully understand lecture 8 so I currently cannot implement this yet.
-		//Kappa.setZero();
 
 		/******************
 		 * Computing D: Damping matrix, lecture 10, slide 28
