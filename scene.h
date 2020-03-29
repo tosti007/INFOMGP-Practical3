@@ -374,8 +374,8 @@ public:
 
 		// L10S22, C is the stiffness tensor, not the stiffness matrix
 		auto C = SparseMatrix<double>(6, 6);
-		for (int y = 0; y < 3; y++)
-			for (int x = 0; x < 3; x++)
+		for (int y = 0; y < 6; y++)
+			for (int x = 0; x < 6; x++)
 			{
 				if (x < 3 && y < 3)
 					C.insert(x, y) = lambda;
