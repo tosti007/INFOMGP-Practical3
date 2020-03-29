@@ -408,25 +408,24 @@ public:
 		Imat << 0, 1, 0, 0,
 			0, 0, 1, 0,
 			0, 0, 0, 1;
-		for (int i = 0; i < nr_vertices; i++)
+		for (int vid = 0; vid < nr_vertices; vid++)
 		{
-			Ge.push_back(Imat * Pe[i].inverse());
+			Ge.push_back(Imat * Pe[vid].inverse());
 		}
 
 		// then calculate Je
 		std::vector<SparseMatrix<double>> Je;
 		Je.reserve(nr_vertices);
-		for (int i = 0; i < nr_vertices; i++)
+		for (int vid = 0; vid < nr_vertices; vid++)
 		{
-			SparseMatrix<double> Je_i(9, 12);
+			Je[vid] = SparseMatrix<double>(9, 12);
 			for (int x = 0; x < 4; x++)
 				for (int y = 0; y < 3; y++)
 				{
-					Je_i.insert(0 + y, 0 + x) = Ge[i](y, x);
-					Je_i.insert(3 + y, 4 + x) = Ge[i](y, x);
-					Je_i.insert(6 + y, 8 + x) = Ge[i](y, x);
+					Je[vid].insert(0 + y, 0 + x) = Ge[vid](y, x);
+					Je[vid].insert(3 + y, 4 + x) = Ge[vid](y, x);
+					Je[vid].insert(6 + y, 8 + x) = Ge[vid](y, x);
 				}
-			Je.push_back(Je_i);
 		}
 
 		// then calculate Be
