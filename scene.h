@@ -514,20 +514,6 @@ public:
 			F_ext(vid * 3 + 2) = 0;
 		}
 
-		Vector3d com = Vector3d(0, 0, 0);
-		for (int vid = 0; vid < nr_vertices; vid++)
-		{
-			com = com + Vector3d(currPositions[3 * vid + 0], currPositions[3 * vid + 1], currPositions[3 * vid + 2]);
-		}
-		com /= (float)nr_vertices;
-		VectorXd comX(3 * nr_vertices);
-		for (int vid = 0; vid < nr_vertices; vid++)
-		{
-			comX(vid * 3 + 0) = com[0];
-			comX(vid * 3 + 1) = com[1];
-			comX(vid * 3 + 2) = com[2];
-		}
-
 		VectorXd rhs = (M * currVelocities) - ((Kappa * (currPositions - origPositions)) - F_ext) * timeStep;
 
 		currVelocities = ASolver->solve(rhs);
