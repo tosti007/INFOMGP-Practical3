@@ -330,35 +330,14 @@ public:
 		  */
 		// Remove all values, but keep memory allocated
 		M.setZero();
-		std::vector<double> mv;
-		mv.reserve(nr_vertices);
 
-		for (int i = 0; i < nr_vertices; i++)
-			mv[i] = 0;
-		// Since running through all vertices and taking the tets takes too long we loop over all tets and
-		// take the vertices. Then update the value
-		for (int tid = 0; tid < nr_tets; tid++)
-		{
-			auto rho_i = density; // No idea if this is correct, but since there is no other denisty.
-			auto V_i = tetVolumes(tid);
-			for (int i = 0; i < 4; i++)
-			{
-				auto vid = T(tid, i);
-				mv[vid] += rho_i * V_i;
-			}
-		}
-		// Create the M matrix from the mv values.
+		// Create the M matrix from invMasses
 		for (int vid = 0; vid < nr_vertices; vid++)
 		{
 			// insert creates a new value and returns the reference.
-			// We devide by 4 since the formula is mv = 1/4 SUM_i p_i V_i
-			//int mid =  * 3;
-			double mi = mv[vid] / 4;
-			M.insert(3 * vid + 0, 3 * vid + 0) = mi;
-			M.insert(3 * vid + 1, 3 * vid + 1) = mi;
-			M.insert(3 * vid + 2, 3 * vid + 2) = mi;
-
-			//std::cout << mi << std::endl;
+			M.insert(3 * vid + 0, 3 * vid + 0) = 1.0 / invMasses[vid];
+			M.insert(3 * vid + 1, 3 * vid + 1) = 1.0 / invMasses[vid];
+			M.insert(3 * vid + 2, 3 * vid + 2) = 1.0 / invMasses[vid];
 		}
 
 		/******************
@@ -541,6 +520,7 @@ public:
 
 		if (isFixed)
 			return;
+
 
 		/****************TODO: construct rhs (right-hand side) and use ASolver->solve(rhs) to solve for velocities********/
 		// The rhs should actually be with external forces applied, however I do not know yet what that should be.
