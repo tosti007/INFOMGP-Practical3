@@ -544,6 +544,20 @@ public:
 		if (isFixed)
 			return;
 
+		MatrixXd P(3, nr_vertices);
+		MatrixXd Q(3, nr_vertices);
+		for (int vid = 1; vid < nr_vertices; vid++)
+		{
+			for (int coord = 0; coord < 3; coord++)
+			{
+				P(coord, vid) = origPositions[coord] - origPositions[vid * 3 + coord];
+				Q(coord, vid) = currPositions[coord] - currPositions[vid * 3 + coord];
+			}
+		}
+		auto S = P * Q.transpose();
+		JacobiSVD<MatrixXd> svd(S, ComputeThinU | ComputeThinV);
+		auto R = svd.matrixU() * svd.matrixV().transpose();
+
 		/****************TODO: construct rhs (right-hand side) and use ASolver->solve(rhs) to solve for velocities********/
 		// The rhs should actually be with external forces applied, however I do not know yet what that should be.
 		// F Should be a 3v vertex, otherwise the dimensions don't add up.
@@ -577,7 +591,8 @@ public:
 			shrinkShape = false;
 		}
 
-		VectorXd rhs = (M * currVelocities) - ((Kappa * (currPositions - origPositions)) - M * F_ext) * timeStep;
+		// VectorXd rhs = (M * currVelocities) - ((Kappa * (currPositions - origPositions)) - M * F_ext) * timeStep;
+		VectorXd rhs = (M * currVelocities) - ((R * Kappa * (R.inverse() * currPositions - origPositions)) - M * F_ext) * timeStep;
 
 		currVelocities = ASolver->solve(rhs);
 	}
