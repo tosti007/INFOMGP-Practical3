@@ -13,6 +13,8 @@
 #include <igl/igl_inline.h>
 #include <string>
 #include <vector>
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 namespace hedra
 {
