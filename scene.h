@@ -442,12 +442,12 @@ public:
 		}
 
 		// then calculate Ke
-		/*std::vector<SparseMatrix<double>> Ke;
-		Ke.reserve(nr_vertices);
-		for (int i = 0; i < nr_vertices; i++)
+		std::vector<SparseMatrix<double>> Ke;
+		Ke.reserve(nr_tets);
+		for (int tid = 0; tid < nr_tets; tid++)
 		{
-			Ke[i] = Be[i].transpose() * C * Be[i];
-		}*/
+			Ke.push_back(Be[tid].transpose() * C * Be[tid]);
+		}
 
 		// nu alle Ke in één grote SparseMatrix K' zetten
 
