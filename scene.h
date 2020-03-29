@@ -339,24 +339,26 @@ public:
 		// take the vertices. Then update the value
 		for (int tid = 0; tid < T.rows(); tid++)
 		{
-			auto p_i = density; // No idea if this is correct, but since there is no other denisty.
+			auto rho_i = 1.0; // No idea if this is correct, but since there is no other denisty.
 			auto V_i = tetVolumes(tid);
 			for (int i = 0; i < 4; i++)
 			{
 				auto vid = T(tid, i);
-				mv[vid] += p_i * V_i;
+				mv[vid] += rho_i * V_i;
 			}
 		}
 		// Create the M matrix from the mv values.
-		for (int i = 0; i < nr_vertices; i++)
+		for (int vid = 0; vid < nr_vertices; vid++)
 		{
 			// insert creates a new value and returns the reference.
 			// We devide by 4 since the formula is mv = 1/4 SUM_i p_i V_i
-			int mid = i * 3;
-			double mi = mv[i] / 4;
-			M.insert(i + 0, i + 0) = mi;
-			M.insert(i + 1, i + 1) = mi;
-			M.insert(i + 2, i + 2) = mi;
+			//int mid =  * 3;
+			double mi = mv[vid] / 4;
+			M.insert(3 * vid + 0, 3 * vid + 0) = mi;
+			M.insert(3 * vid + 1, 3 * vid + 1) = mi;
+			M.insert(3 * vid + 2, 3 * vid + 2) = mi;
+
+			//std::cout << mi << std::endl;
 		}
 
 		/******************
@@ -492,6 +494,7 @@ public:
 		/******************
 		 * Computing A, implementation given
 		 */
+
 		A = M + D * timeStep + Kappa * (timeStep * timeStep);
 
 		//Should currently fail since A is empty
@@ -536,7 +539,7 @@ public:
 
 		if (isFixed)
 			return;
-
+		
 		/****************TODO: construct rhs (right-hand side) and use ASolver->solve(rhs) to solve for velocities********/
 		// The rhs should actually be with external forces applied, however I do not know yet what that should be.
 		// F Should be a 3v vertex, otherwise the dimensions don't add up.
