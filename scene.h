@@ -462,11 +462,29 @@ public:
 		}
 
 		// Q berekenen
+		SparseMatrix<double> Q(12 * nr_tets, 3 * nr_vertices);
+		for (int tid = 0; tid < nr_tets; tid++)
+		{
+			// loop over vertices of tet
+			for (int j = 0; j < 4; j++)
+			{
+				int vid = T(tid, j);
+
+				// loop over coordinates x,y,z
+				for (int coord = 0; coord < 3; coord++)
+				{
+					int old_pos = 3 * vid + coord;          // position in vector that is the input to Q
+					int new_pos = 12 * tid + 3 * j + coord; // position in vector that Q constructs
+					Q.insert(new_pos, old_pos) = 1;
+				}
+			}
+		}
 
 		// K = Q^T * K' * Q
+		Kappa = (Q.transpose() * Kprime) * Q;
 
 		// I did not fully understand lecture 8 so I currently cannot implement this yet.
-		Kappa.setZero();
+		//Kappa.setZero();
 
 		/******************
 		 * Computing D: Damping matrix, lecture 10, slide 28
