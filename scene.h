@@ -437,7 +437,7 @@ public:
 		for (int tid = 0; tid < nr_tets; tid++)
 		{
 			SparseMatrix<double> Be_i(6, 12);
-			Be_i = constD * Je[tid]; // ik snap niet waarom maar dit gaat fout, de groottes van de matrices zouden compatibel moeten zijn
+			Be_i = constD * Je[tid];
 			Be.push_back(Be_i);
 		}
 
