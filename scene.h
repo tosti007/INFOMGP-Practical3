@@ -405,7 +405,8 @@ public:
 			}
 
 			// Calculate Be
-			SparseMatrix<double> Be(6, 12); Be = constD * Je;
+			SparseMatrix<double> Be(6, 12);
+			Be = constD * Je;
 			SparseMatrix<double> Ke_i(12, 12);
 			Ke_i = (Be.transpose() * C) * Be;
 			Ke.push_back(Ke_i);
@@ -499,7 +500,6 @@ public:
 
 		if (isFixed)
 			return;
-
 
 		/****************TODO: construct rhs (right-hand side) and use ASolver->solve(rhs) to solve for velocities********/
 		// The rhs should actually be with external forces applied, however I do not know yet what that should be.
