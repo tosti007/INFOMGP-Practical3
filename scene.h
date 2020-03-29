@@ -387,8 +387,8 @@ public:
 
 		// first calculate Pe
 		std::vector<Matrix<double, 4, 4>> Pe;
-		Pe.reserve(nr_vertices);
-		for (int tid = 0; tid < nr_vertices; tid++)
+		Pe.reserve(nr_tets);
+		for (int tid = 0; tid < nr_tets; tid++)
 		{
 			Matrix<double, 4, 4> Pe_i;
 			for (int j = 0; j < 4; j++)
@@ -404,28 +404,28 @@ public:
 
 		// then calculate Ge
 		std::vector<Matrix<double, 3, 4>> Ge;
-		Ge.reserve(nr_vertices);
+		Ge.reserve(nr_tets);
 		Matrix<double, 3, 4> Imat;
 		Imat << 0, 1, 0, 0,
 			0, 0, 1, 0,
 			0, 0, 0, 1;
-		for (int vid = 0; vid < nr_vertices; vid++)
+		for (int tid = 0; tid < nr_tets; tid++)
 		{
-			Ge.push_back(Imat * Pe[vid].inverse());
+			Ge.push_back(Imat * Pe[tid].inverse());
 		}
 
 		// then calculate Je
 		std::vector<SparseMatrix<double>> Je;
-		Je.reserve(nr_vertices);
-		for (int vid = 0; vid < nr_vertices; vid++)
+		Je.reserve(nr_tets);
+		for (int tid = 0; tid < nr_tets; tid++)
 		{
-			Je[vid] = SparseMatrix<double>(9, 12);
+			Je[tid] = SparseMatrix<double>(9, 12);
 			for (int x = 0; x < 4; x++)
 				for (int y = 0; y < 3; y++)
 				{
-					Je[vid].insert(0 + y, 0 + x) = Ge[vid](y, x);
-					Je[vid].insert(3 + y, 4 + x) = Ge[vid](y, x);
-					Je[vid].insert(6 + y, 8 + x) = Ge[vid](y, x);
+					Je[tid].insert(0 + y, 0 + x) = Ge[tid](y, x);
+					Je[tid].insert(3 + y, 4 + x) = Ge[tid](y, x);
+					Je[tid].insert(6 + y, 8 + x) = Ge[tid](y, x);
 				}
 		}
 
