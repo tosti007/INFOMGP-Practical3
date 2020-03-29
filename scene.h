@@ -422,12 +422,13 @@ public:
 		for (int tid = 0; tid < nr_tets; tid++)
 		{
 			SparseMatrix<double> Je_i(9, 12);
-			for (int x = 0; x < 4; x++) for (int y = 0; y < 3; y++)
-			{
-				double value = Ge[tid](y, x);
-				for (int i = 0; i < 3; i++)
-					Je_i.insert(i * 3 + y, i * 4 + x) = value;
-			}
+			for (int x = 0; x < 4; x++)
+				for (int y = 0; y < 3; y++)
+				{
+					double value = Ge[tid](y, x);
+					for (int i = 0; i < 3; i++)
+						Je_i.insert(i * 3 + y, i * 4 + x) = value;
+				}
 			Je.push_back(Je_i);
 		}
 
@@ -456,11 +457,12 @@ public:
 		SparseMatrix<double> Kprime(12 * nr_tets, 12 * nr_tets);
 		for (int tid = 0; tid < nr_tets; tid++)
 		{
-			for (int x = 0; x < 12; x++) for (int y = 0; y < 12; y++)
-			{
-				double value = Ke[tid].coeffRef(y, x);
-				Kprime.insert(12 * tid + y, 12 * tid + x) = value;
-			}
+			for (int x = 0; x < 12; x++)
+				for (int y = 0; y < 12; y++)
+				{
+					double value = Ke[tid].coeffRef(y, x);
+					Kprime.insert(12 * tid + y, 12 * tid + x) = value;
+				}
 		}
 
 		// Q berekenen
@@ -475,7 +477,7 @@ public:
 				// loop over coordinates x,y,z
 				for (int coord = 0; coord < 3; coord++)
 				{
-					int old_pos = 3 * vid + coord;          // position in vector that is the input to Q
+					int old_pos = 3 * vid + coord;			// position in vector that is the input to Q
 					int new_pos = 12 * tid + 4 * coord + j; // position in vector that Q constructs
 
 					Q.insert(new_pos, old_pos) = 1;
@@ -539,7 +541,7 @@ public:
 
 		if (isFixed)
 			return;
-		
+
 		/****************TODO: construct rhs (right-hand side) and use ASolver->solve(rhs) to solve for velocities********/
 		// The rhs should actually be with external forces applied, however I do not know yet what that should be.
 		// F Should be a 3v vertex, otherwise the dimensions don't add up.
