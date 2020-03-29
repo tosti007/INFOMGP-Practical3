@@ -341,7 +341,7 @@ public:
 		}
 
 		/******************
-		 * Computing Kappa: Stiffnes matrix,
+		 * Computing Kappa: Stiffness matrix,
 		 *   - lecture 8, slide 6, 9, 11, 15, 19
 		 *   - lecture 10, slide 28
 		 * K is a 3v × 3v matrix (lecture 10, slide 24)
@@ -352,87 +352,66 @@ public:
 		double lambda = poissonRatio * youngModulus / ((1 + poissonRatio) * (1 - 2 * poissonRatio));
 
 		// L10S22, C is the stiffness tensor, not the stiffness matrix
-		auto C = SparseMatrix<double>(6, 6);
-		for (int y = 0; y < 6; y++)
-			for (int x = 0; x < 6; x++)
-			{
-				if (x < 3 && y < 3)
-					C.insert(x, y) = lambda;
-				if (x == y)
-				{
-					C.coeffRef(x, y) += mu;
-					if (x < 3)
-						C.coeffRef(x, y) += mu;
-				}
-			}
+		SparseMatrix<double> C(6, 6);
+		C.insert(0, 0) = lambda + 2 * mu;
+		C.insert(1, 1) = lambda + 2 * mu;
+		C.insert(2, 2) = lambda + 2 * mu;
+		C.insert(3, 3) = lambda + 1 * mu;
+		C.insert(4, 4) = lambda + 1 * mu;
+		C.insert(5, 5) = lambda + 1 * mu;
+		C.insert(0, 1) = lambda;
+		C.insert(0, 2) = lambda;
+		C.insert(1, 2) = lambda;
+		C.insert(1, 0) = lambda;
+		C.insert(2, 0) = lambda;
+		C.insert(2, 1) = lambda;
 
-		// first calculate Pe
-		std::vector<Matrix<double, 4, 4>> Pe;
-		Pe.reserve(nr_tets);
-		for (int tid = 0; tid < nr_tets; tid++)
-		{
-			Matrix<double, 4, 4> Pe_i;
-			for (int j = 0; j < 4; j++)
-			{
-				int vid = T(tid, j);
-				Pe_i(j, 0) = 1.0;
-				Pe_i(j, 1) = origPositions[3 * vid + 0];
-				Pe_i(j, 2) = origPositions[3 * vid + 1];
-				Pe_i(j, 3) = origPositions[3 * vid + 2];
-			}
-			Pe.push_back(Pe_i);
-		}
-
-		// then calculate Ge
-		std::vector<Matrix<double, 3, 4>> Ge;
-		Ge.reserve(nr_tets);
 		Matrix<double, 3, 4> Imat;
 		Imat << 0, 1, 0, 0,
 			0, 0, 1, 0,
 			0, 0, 0, 1;
-		for (int tid = 0; tid < nr_tets; tid++)
-		{
-			Ge.push_back(Imat * Pe[tid].inverse());
-		}
 
-		// then calculate Je
-		std::vector<SparseMatrix<double>> Je;
-		Je.reserve(nr_tets);
-		for (int tid = 0; tid < nr_tets; tid++)
-		{
-			SparseMatrix<double> Je_i(9, 12);
-			for (int x = 0; x < 4; x++)
-				for (int y = 0; y < 3; y++)
-				{
-					double value = Ge[tid](y, x);
-					for (int i = 0; i < 3; i++)
-						Je_i.insert(i * 3 + y, i * 4 + x) = value;
-				}
-			Je.push_back(Je_i);
-		}
+		SparseMatrix<double> constD = GetConstD();
 
-		// then calculate Be
-		std::vector<SparseMatrix<double>> Be;
-		Be.reserve(nr_tets);
-		auto constD = GetConstD();
-		for (int tid = 0; tid < nr_tets; tid++)
-		{
-			SparseMatrix<double> Be_i(6, 12);
-			Be_i = constD * Je[tid];
-			Be.push_back(Be_i);
-		}
-
-		// then calculate Ke
+		// Calculate Ke for every tet
 		std::vector<SparseMatrix<double>> Ke;
 		Ke.reserve(nr_tets);
 		for (int tid = 0; tid < nr_tets; tid++)
 		{
+			// Calculate Pe
+			Matrix<double, 4, 4> Pe;
+			for (int j = 0; j < 4; j++)
+			{
+				int vid = T(tid, j);
+				Pe(j, 0) = 1.0;
+				Pe(j, 1) = origPositions[3 * vid + 0];
+				Pe(j, 2) = origPositions[3 * vid + 1];
+				Pe(j, 3) = origPositions[3 * vid + 2];
+			}
+
+			// Calculate Ge
+			Matrix<double, 3, 4> Ge = Imat * Pe.inverse();
+
+			// Calculate Je
+			SparseMatrix<double> Je(9, 12);
+			for (int x = 0; x < 4; x++)
+			{
+				for (int y = 0; y < 3; y++)
+				{
+					double value = Ge(y, x);
+					for (int i = 0; i < 3; i++)
+						Je.insert(i * 3 + y, i * 4 + x) = value;
+				}
+			}
+
+			// Calculate Be
+			SparseMatrix<double> Be(6, 12); Be = constD * Je;
 			SparseMatrix<double> Ke_i(12, 12);
-			Ke_i = (Be[tid].transpose() * C) * Be[tid];
+			Ke_i = (Be.transpose() * C) * Be;
 			Ke.push_back(Ke_i);
 		}
 
-		// nu alle Ke in één grote SparseMatrix K' zetten
+		// Put all Ke's together into one large SparseMatrix Kprime (K')
 		SparseMatrix<double> Kprime(12 * nr_tets, 12 * nr_tets);
 		for (int tid = 0; tid < nr_tets; tid++)
 		{
@@ -444,7 +423,7 @@ public:
 				}
 		}
 
-		// Q berekenen
+		// Calculate Q
 		SparseMatrix<double> Q(12 * nr_tets, 3 * nr_vertices);
 		for (int tid = 0; tid < nr_tets; tid++)
 		{
@@ -535,7 +514,21 @@ public:
 			F_ext(vid * 3 + 2) = 0;
 		}
 
-		VectorXd rhs = M * currVelocities - (Kappa * (currPositions - origPositions) - F_ext) * timeStep;
+		Vector3d com = Vector3d(0, 0, 0);
+		for (int vid = 0; vid < nr_vertices; vid++)
+		{
+			com = com + Vector3d(currPositions[3 * vid + 0], currPositions[3 * vid + 1], currPositions[3 * vid + 2]);
+		}
+		com /= (float)nr_vertices;
+		VectorXd comX(3 * nr_vertices);
+		for (int vid = 0; vid < nr_vertices; vid++)
+		{
+			comX(vid * 3 + 0) = com[0];
+			comX(vid * 3 + 1) = com[1];
+			comX(vid * 3 + 2) = com[2];
+		}
+
+		VectorXd rhs = (M * currVelocities) - ((Kappa * (currPositions - origPositions)) - F_ext) * timeStep;
 
 		currVelocities = ASolver->solve(rhs);
 	}
