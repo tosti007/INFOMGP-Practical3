@@ -633,6 +633,10 @@ public:
 		// of vertices?!?!?!?
 		nr_vertices = invMasses.rows();
 		nr_tets = T.rows();
+
+		printf("Number of tets: %i\n", nr_tets);
+		printf("Number of vertices: %i\n", nr_vertices);
+
 		assert(nr_vertices == origPositions.rows() / 3);
 		assert(nr_vertices == T.rows() * 4);
 
