@@ -394,10 +394,10 @@ public:
 			for (int j = 0; j < 4; j++)
 			{
 				int vid = 3 * T(tid, j);
-				Pe[tid](j, 0) = 1.0;
-				Pe[tid](j, 1) = origPositions[vid + 0];
-				Pe[tid](j, 2) = origPositions[vid + 1];
-				Pe[tid](j, 3) = origPositions[vid + 2];
+				Pe_i(j, 0) = 1.0;
+				Pe_i(j, 1) = origPositions[vid + 0];
+				Pe_i(j, 2) = origPositions[vid + 1];
+				Pe_i(j, 3) = origPositions[vid + 2];
 			}
 			Pe.push_back(Pe_i);
 		}
@@ -419,14 +419,15 @@ public:
 		Je.reserve(nr_tets);
 		for (int tid = 0; tid < nr_tets; tid++)
 		{
-			Je[tid] = SparseMatrix<double>(9, 12);
+			SparseMatrix<double> Je_i(9, 12);
 			for (int x = 0; x < 4; x++)
 				for (int y = 0; y < 3; y++)
 				{
-					Je[tid].insert(0 + y, 0 + x) = Ge[tid](y, x);
-					Je[tid].insert(3 + y, 4 + x) = Ge[tid](y, x);
-					Je[tid].insert(6 + y, 8 + x) = Ge[tid](y, x);
+					Je_i.insert(0 + y, 0 + x) = Ge[tid](y, x);
+					Je_i.insert(3 + y, 4 + x) = Ge[tid](y, x);
+					Je_i.insert(6 + y, 8 + x) = Ge[tid](y, x);
 				}
+			Je.push_back(Je_i);
 		}
 
 		// then calculate Be
