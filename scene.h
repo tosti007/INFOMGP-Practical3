@@ -339,7 +339,7 @@ public:
 		// take the vertices. Then update the value
 		for (int tid = 0; tid < T.rows(); tid++)
 		{
-			auto rho_i = 1.0; // No idea if this is correct, but since there is no other denisty.
+			auto rho_i = density; // No idea if this is correct, but since there is no other denisty.
 			auto V_i = tetVolumes(tid);
 			for (int i = 0; i < 4; i++)
 			{
