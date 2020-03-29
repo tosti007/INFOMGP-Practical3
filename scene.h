@@ -549,7 +549,7 @@ public:
 		{
 			// Set only the y to the gravity value.
 			F_ext(vid * 3 + 0) = 0;
-			F_ext(vid * 3 + 1) = -9.8;
+			F_ext(vid * 3 + 1) = -9.8 * M.coeff(vid, vid);
 			F_ext(vid * 3 + 2) = 0;
 		}
 
