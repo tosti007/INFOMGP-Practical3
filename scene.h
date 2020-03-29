@@ -337,7 +337,7 @@ public:
 			mv[i] = 0;
 		// Since running through all vertices and taking the tets takes too long we loop over all tets and
 		// take the vertices. Then update the value
-		for (int tid = 0; tid < T.rows(); tid++)
+		for (int tid = 0; tid < nr_tets; tid++)
 		{
 			auto rho_i = density; // No idea if this is correct, but since there is no other denisty.
 			auto V_i = tetVolumes(tid);
