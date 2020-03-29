@@ -423,9 +423,9 @@ public:
 			for (int x = 0; x < 4; x++)
 				for (int y = 0; y < 3; y++)
 				{
-					Je_i.insert(0 + y, 0 + x) = Ge[tid](y, x);
-					Je_i.insert(3 + y, 4 + x) = Ge[tid](y, x);
-					Je_i.insert(6 + y, 8 + x) = Ge[tid](y, x);
+					auto value = Ge[tid](y, x);
+					for (int i = 0; i < 3; i++)
+						Je_i.insert(i * 3 + y, i * 4 + x) = value;
 				}
 			Je.push_back(Je_i);
 		}
