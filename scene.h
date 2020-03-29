@@ -522,8 +522,20 @@ public:
 			return;
 
 		/****************TODO: construct rhs (right-hand side) and use ASolver->solve(rhs) to solve for velocities********/
+		// The rhs should actually be with external forces applied, however I do not know yet what that should be.
+		// F Should be a 3v vertex, otherwise the dimensions don't add up.
+		// I am asuming this should be stuff like gravity, so we use the gravity constant for it.
+		VectorXd F_ext(3 * nr_vertices);
+		for (int vid = 0; vid < nr_vertices; vid++)
+		{
+			// Set only the y to the gravity value.
+			F_ext(vid * 3 + 0) = 0;
+			F_ext(vid * 3 + 1) = -9.8;
+			F_ext(vid * 3 + 2) = 0;
+		}
 
-		VectorXd rhs = VectorXd::Zero(currVelocities.size()); //REMOVE THIS! it's a stub
+		VectorXd rhs = M * currVelocities - (Kappa * (currPositions - origPositions) - F_ext) * timeStep;
+
 		currVelocities = ASolver->solve(rhs);
 	}
 
