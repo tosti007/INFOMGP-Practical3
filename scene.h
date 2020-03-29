@@ -420,13 +420,12 @@ public:
 		for (int tid = 0; tid < nr_tets; tid++)
 		{
 			SparseMatrix<double> Je_i(9, 12);
-			for (int x = 0; x < 4; x++)
-				for (int y = 0; y < 3; y++)
-				{
-					auto value = Ge[tid](y, x);
-					for (int i = 0; i < 3; i++)
-						Je_i.insert(i * 3 + y, i * 4 + x) = value;
-				}
+			for (int x = 0; x < 4; x++) for (int y = 0; y < 3; y++)
+			{
+				double value = Ge[tid](y, x);
+				for (int i = 0; i < 3; i++)
+					Je_i.insert(i * 3 + y, i * 4 + x) = value;
+			}
 			Je.push_back(Je_i);
 		}
 
@@ -446,10 +445,21 @@ public:
 		Ke.reserve(nr_tets);
 		for (int tid = 0; tid < nr_tets; tid++)
 		{
-			Ke.push_back(Be[tid].transpose() * C * Be[tid]);
+			SparseMatrix<double> Ke_i(12, 12);
+			Ke_i = (Be[tid].transpose() * C) * Be[tid];
+			Ke.push_back(Ke_i);
 		}
 
 		// nu alle Ke in één grote SparseMatrix K' zetten
+		SparseMatrix<double> Kprime(12 * nr_tets, 12 * nr_tets);
+		for (int tid = 0; tid < nr_tets; tid++)
+		{
+			for (int x = 0; x < 12; x++) for (int y = 0; y < 12; y++)
+			{
+				double value = Ke[tid].coeffRef(y, x);
+				Kprime.insert(12 * tid + y, 12 * tid + x) = value;
+			}
+		}
 
 		// Q berekenen
 
