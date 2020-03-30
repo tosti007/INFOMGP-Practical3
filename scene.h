@@ -445,7 +445,7 @@ public:
 		}
 
 		// K = Q^T * K' * Q
-		Kappa = (Q.transpose() * Kprime) * Q;
+		Kappa = Q.transpose() * Kprime * Q;
 
 		/******************
 		 * Computing D: Damping matrix, lecture 10, slide 28
@@ -510,11 +510,11 @@ public:
 		{
 			// Set only the y to the gravity value.
 			F_ext(vid * 3 + 0) = 0;
-			F_ext(vid * 3 + 1) = -9.8 / invMasses[vid];
+			F_ext(vid * 3 + 1) = -9.8;
 			F_ext(vid * 3 + 2) = 0;
 		}
 
-		VectorXd rhs = (M * currVelocities) - ((Kappa * (currPositions - origPositions)) - F_ext) * timeStep;
+		VectorXd rhs = (M * currVelocities) - ((Kappa * (currPositions - origPositions)) - M * F_ext) * timeStep;
 
 		currVelocities = ASolver->solve(rhs);
 	}
