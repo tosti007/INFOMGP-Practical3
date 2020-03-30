@@ -591,41 +591,22 @@ public:
 			shrinkShape = false;
 		}
 
-		/*
-		VectorXd mm(12);
-		mm << 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12;
-		std::cout << "VECTOR:\n" << mm << std::endl;
-
-		MatrixXd m = Eigen::Map<Eigen::MatrixXd>(mm.data(), 3, 4);
-		m.transposeInPlace();
-		// m.resize(3, currPositions.rows() / 3);
-		std::cout << m << std::endl;
-		// DO SOMETHING
-		m.transposeInPlace();
-		m.resize(12, 1);
-		std::cout << m << std::endl;
-			*/
-
 		// Without rotation: f = K(x - x0)
 		// With rotation:    f = RK(R^-1 * x - x0)
 
 		// Resize the matrices to 3xV
 		MatrixXd huidig = Eigen::Map<Eigen::MatrixXd>(currPositions.data(), 3, nr_vertices);
-		huidig.transposeInPlace();
 		// Caculate (rotated) difference
 		MatrixXd rotated = R.inverse() * huidig;
 		// Resize back to 3Vx1
-		rotated.transposeInPlace();
 		rotated.resize(nr_vertices * 3, 1);
 		// Mutiply by Kappa
 		MatrixXd Kdifferences = Kappa * (rotated - origPositions);
 		// Resize to 3xV
 		Kdifferences.resize(3, nr_vertices);
-		Kdifferences.transposeInPlace();
 		// Rotate differences back
 		MatrixXd RKdifferences = R * Kdifferences;
 		// Resize back
-		RKdifferences.transposeInPlace();
 		RKdifferences.resize(nr_vertices * 3, 1);
 
 		// Create a vector
@@ -721,7 +702,6 @@ public:
 		printf("Number of vertices: %i\n", nr_vertices);
 
 		assert(nr_vertices == origPositions.rows() / 3);
-		assert(nr_vertices == T.rows() * 4);
 
 		M = SparseMatrix<double>(nr_vertices * 3, nr_vertices * 3);
 		M.reserve(nr_vertices * 3);
