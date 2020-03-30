@@ -597,7 +597,7 @@ public:
 		MatrixXd huidig = Eigen::Map<Eigen::MatrixXd>(currPositions.data(), 3, nr_vertices);
 		MatrixXd orginele = Eigen::Map<Eigen::MatrixXd>(origPositions.data(), 3, nr_vertices);
 		// (R*AT)T = ATT*RT = A*RT
-		MatrixXd differences = currPositions * RT.inverse() - origPositions;
+		MatrixXd differences = huidig * RT.inverse() - orginele;
 		// Resize back to 3Vx1
 		differences.resize(nr_vertices * 3, 1);
 		// Mutiply by Kappa
