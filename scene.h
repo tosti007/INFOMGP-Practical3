@@ -59,7 +59,7 @@ public:
 
 	SparseMatrix<double> A, Kappa, M, D; //The soft-body matrices
 
-	SimplicialLLT<SparseMatrix<double>> *ASolver; //the solver for the left-hand side matrix constructed for FEM
+	ConjugateGradient<SparseMatrix<double>> *ASolver; //the solver for the left-hand side matrix constructed for FEM
 
 	~Mesh()
 	{
@@ -483,7 +483,7 @@ public:
 		A = M + D * timeStep + Kappa * (timeStep * timeStep);
 
 		if (ASolver == NULL)
-			ASolver = new SimplicialLLT<SparseMatrix<double>>();
+			ASolver = new ConjugateGradient<SparseMatrix<double>>();
 		ASolver->analyzePattern(A);
 		ASolver->factorize(A);
 	}
@@ -544,6 +544,20 @@ public:
 		if (isFixed)
 			return;
 
+		MatrixXd P(3, nr_vertices);
+		MatrixXd Q(3, nr_vertices);
+		for (int vid = 1; vid < nr_vertices; vid++)
+		{
+			for (int coord = 0; coord < 3; coord++)
+			{
+				P(coord, vid) = origPositions[coord] - origPositions[vid * 3 + coord];
+				Q(coord, vid) = currPositions[coord] - currPositions[vid * 3 + coord];
+			}
+		}
+		auto S = P * Q.transpose();
+		JacobiSVD<MatrixXd> svd(S, ComputeThinU | ComputeThinV);
+		auto R = svd.matrixU() * svd.matrixV().transpose();
+
 		/****************TODO: construct rhs (right-hand side) and use ASolver->solve(rhs) to solve for velocities********/
 		// The rhs should actually be with external forces applied, however I do not know yet what that should be.
 		// F Should be a 3v vertex, otherwise the dimensions don't add up.
@@ -577,7 +591,30 @@ public:
 			shrinkShape = false;
 		}
 
-		VectorXd rhs = (M * currVelocities) - ((Kappa * (currPositions - origPositions)) - M * F_ext) * timeStep;
+		// Without rotation: f = K(x - x0)
+		// With rotation:    f = RK(R^-1 * x - x0)
+
+		// Resize the matrices to 3xV
+		MatrixXd huidig = Eigen::Map<Eigen::MatrixXd>(currPositions.data(), 3, nr_vertices);
+		// Caculate (rotated) difference
+		MatrixXd rotated = R.inverse() * huidig;
+		// Resize back to 3Vx1
+		rotated.resize(nr_vertices * 3, 1);
+		// Mutiply by Kappa
+		MatrixXd Kdifferences = Kappa * (rotated - origPositions);
+		// Resize to 3xV
+		Kdifferences.resize(3, nr_vertices);
+		// Rotate differences back
+		MatrixXd RKdifferences = R * Kdifferences;
+		// Resize back
+		RKdifferences.resize(nr_vertices * 3, 1);
+
+		// Create a vector
+		VectorXd F_int(Map<VectorXd>(RKdifferences.data(), RKdifferences.cols() * RKdifferences.rows()));
+		VectorXd rhs = (M * currVelocities) - (F_int - M * F_ext) * timeStep;
+
+		// VectorXd rhs = (M * currVelocities) - ((Kappa * (currPositions - origPositions)) - M * F_ext) * timeStep;
+		// VectorXd rhs = (M * currVelocities) - ((R * Kappa * (R.inverse() * currPositions - origPositions)) - M * F_ext) * timeStep;
 
 		currVelocities = ASolver->solve(rhs);
 	}
@@ -665,7 +702,6 @@ public:
 		printf("Number of vertices: %i\n", nr_vertices);
 
 		assert(nr_vertices == origPositions.rows() / 3);
-		assert(nr_vertices == T.rows() * 4);
 
 		M = SparseMatrix<double>(nr_vertices * 3, nr_vertices * 3);
 		M.reserve(nr_vertices * 3);
