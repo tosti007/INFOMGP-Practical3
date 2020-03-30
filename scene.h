@@ -46,6 +46,10 @@ public:
 	VectorXd tetVolumes;	 //|T|x1 tetrahedra volumes
 	int globalOffset;		 //the global index offset of the of opositions/velocities/impulses from the beginning of the global coordinates array in the containing scene class
 
+	//VectorXd F_ext;
+	Vector3d F_optional;
+	bool newF_optional = false;
+
 	VectorXi boundTets; //just the boundary tets, for collision
 
 	double youngModulus, poissonRatio, density;
@@ -58,6 +62,14 @@ public:
 	{
 		if (ASolver != NULL)
 			delete ASolver;
+	}
+	void setForceOptional(double optionalForce_x, double optionalForce_y, double optionalForce_z) //float vector3
+	{
+		//F_optional(0 * 3 + 0) = optionalForce_x;
+		//F_optional(0 * 3 + 1) = optionalForce_y;
+		//F_optional(0 * 3 + 2) = optionalForce_z;
+		F_optional << optionalForce_x, optionalForce_y, optionalForce_z;
+		newF_optional = true;
 	}
 
 	//Quick-reject checking collision between mesh bounding boxes.
@@ -507,6 +519,7 @@ public:
 		// The rhs should actually be with external forces applied, however I do not know yet what that should be.
 		// F Should be a 3v vertex, otherwise the dimensions don't add up.
 		// I am asuming this should be stuff like gravity, so we use the gravity constant for it.
+
 		VectorXd F_ext(3 * nr_vertices);
 		for (int vid = 0; vid < nr_vertices; vid++)
 		{
@@ -515,7 +528,9 @@ public:
 			F_ext(vid * 3 + 1) = -9.8;
 			F_ext(vid * 3 + 2) = 0;
 		}
-
+		//F_ext(0) = F_ext(0) + F_optional[0];
+		//F_ext(1) = F_ext(1) + F_optional[1];
+		//F_ext(2) = F_ext(2) + F_optional[2];
 		VectorXd rhs = (M * currVelocities) - ((Kappa * (currPositions - origPositions)) - M * F_ext) * timeStep;
 
 		currVelocities = ASolver->solve(rhs);
@@ -598,6 +613,8 @@ public:
 		nr_vertices = invMasses.rows();
 		nr_tets = T.rows();
 
+		//F_ext(3 * nr_vertices);
+
 		printf("Number of tets: %i\n", nr_tets);
 		printf("Number of vertices: %i\n", nr_vertices);
 
@@ -628,6 +645,15 @@ public:
 
 	vector<Constraint> userConstraints;	   //provided from the scene
 	vector<Constraint> barrierConstraints; //provided by the platform
+
+	void setForceOptional(double optionalForce_x, double optionalForce_y, double optionalForce_z) //float vector3
+	{
+		for (Mesh mesh : meshes)
+		{
+			mesh.setForceOptional(optionalForce_x, optionalForce_y, optionalForce_z);
+		}
+		
+	}
 
 	//updates from global values back into mesh values
 	void global2Mesh()

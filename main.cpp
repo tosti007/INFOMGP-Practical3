@@ -158,6 +158,7 @@ bool pre_draw(igl::opengl::glfw::Viewer &viewer)
 
 class CustomMenu : public igl::opengl::glfw::imgui::ImGuiMenu
 {
+	float optionalForce[3] = { 0, 0, 0 };
 
     virtual void draw_viewer_menu() override
     {
@@ -169,11 +170,19 @@ class CustomMenu : public igl::opengl::glfw::imgui::ImGuiMenu
         {
             ImGui::InputFloat("CR Coeff", &CRCoeff, 0, 0, 3);
 
-            if (ImGui::InputFloat("Time Step", &timeStep))
-            {
-                mgpViewer.core.animation_max_fps = (((int)1.0 / timeStep));
-            }
+			if (ImGui::InputFloat("Time Step", &timeStep))
+			{
+				mgpViewer.core.animation_max_fps = (((int)1.0 / timeStep));
+			}
         }
+		if (ImGui::CollapsingHeader("Interaction", ImGuiTreeNodeFlags_DefaultOpen))
+		{
+			ImGui::InputFloat3("Force to squish", optionalForce, 2);
+			if (ImGui::Button("Apply Force once"))
+			{
+				scene.setForceOptional((double)optionalForce[0], (double)optionalForce[1], (double)optionalForce[2]);
+			}
+		}
     }
 };
 
