@@ -335,7 +335,7 @@ public:
 		for (int vid = 0; vid < nr_vertices; vid++)
 		{
 			// insert creates a new value and returns the reference.
-			double value = 1.0 / invMasses[vid];
+			double value = voronoiVolumes[vid] * density;
 			M.insert(3 * vid + 0, 3 * vid + 0) = value;
 			M.insert(3 * vid + 1, 3 * vid + 1) = value;
 			M.insert(3 * vid + 2, 3 * vid + 2) = value;
