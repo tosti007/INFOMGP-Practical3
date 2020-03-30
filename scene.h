@@ -47,8 +47,11 @@ public:
 	int globalOffset;		 //the global index offset of the of opositions/velocities/impulses from the beginning of the global coordinates array in the containing scene class
 
 	//VectorXd F_ext;
-	Vector3d F_optional;
-	bool newF_optional = false;
+	//Vector3d F_optional;
+	//bool newF_optional = false;
+
+	float shrinkFactor = 0;
+	bool shrinkShape = false;
 
 	VectorXi boundTets; //just the boundary tets, for collision
 
@@ -63,13 +66,19 @@ public:
 		if (ASolver != NULL)
 			delete ASolver;
 	}
-	void setForceOptional(double optionalForce_x, double optionalForce_y, double optionalForce_z) //float vector3
+	//void setForceOptional(double optionalForce_x, double optionalForce_y, double optionalForce_z) //float vector3
+	//{
+	//	//F_optional(0 * 3 + 0) = optionalForce_x;
+	//	//F_optional(0 * 3 + 1) = optionalForce_y;
+	//	//F_optional(0 * 3 + 2) = optionalForce_z;
+	//	F_optional << optionalForce_x, optionalForce_y, optionalForce_z;
+	//	newF_optional = true;
+	//}
+
+	void ShrinkShape(float factor)
 	{
-		//F_optional(0 * 3 + 0) = optionalForce_x;
-		//F_optional(0 * 3 + 1) = optionalForce_y;
-		//F_optional(0 * 3 + 2) = optionalForce_z;
-		F_optional << optionalForce_x, optionalForce_y, optionalForce_z;
-		newF_optional = true;
+		shrinkFactor = factor;
+		shrinkShape = true;
 	}
 
 	//Quick-reject checking collision between mesh bounding boxes.
@@ -508,6 +517,26 @@ public:
 		return COM;
 	}
 
+
+	Vector3d getCOM()
+	{
+		Vector3d com = Vector3d(0, 0, 0);
+		for (int vid = 0; vid < nr_vertices; vid++)
+		{
+			com = com + Vector3d(currPositions[3 * vid + 0], currPositions[3 * vid + 1], currPositions[3 * vid + 2]);
+		}
+		com /= (float)nr_vertices;
+		VectorXd comX(3 * nr_vertices);
+		for (int vid = 0; vid < nr_vertices; vid++)
+		{
+			comX(vid * 3 + 0) = com[0];
+			comX(vid * 3 + 1) = com[1];
+			comX(vid * 3 + 2) = com[2];
+		}
+
+		return com;
+	}
+
 	//performing the integration step of the soft body.
 	void integrateVelocity(double timeStep)
 	{
@@ -520,6 +549,9 @@ public:
 		// F Should be a 3v vertex, otherwise the dimensions don't add up.
 		// I am asuming this should be stuff like gravity, so we use the gravity constant for it.
 
+
+
+
 		VectorXd F_ext(3 * nr_vertices);
 		for (int vid = 0; vid < nr_vertices; vid++)
 		{
@@ -528,9 +560,23 @@ public:
 			F_ext(vid * 3 + 1) = -9.8;
 			F_ext(vid * 3 + 2) = 0;
 		}
-		//F_ext(0) = F_ext(0) + F_optional[0];
-		//F_ext(1) = F_ext(1) + F_optional[1];
-		//F_ext(2) = F_ext(2) + F_optional[2];
+		if (shrinkShape)
+		{
+			Vector3d COM = getCOM();
+			for (int vid = 0; vid < nr_vertices; vid++)
+			{
+				Vector3d direction; direction << COM[0] - currPositions(vid * 3 + 0), COM[1] - currPositions(vid * 3 + 1), COM[2] - currPositions(vid * 3 + 2);
+				direction.normalize();
+				//F_ext(vid * 3 + 0) = F_ext(vid * 3 + 0) + direction[0] * 1000;
+				//F_ext(vid * 3 + 1) = F_ext(vid * 3 + 1) + direction[1] * 1000;
+				//F_ext(vid * 3 + 2) = F_ext(vid * 3 + 2) + direction[2] * 1000;
+				currPositions(vid * 3 + 0) = currPositions(vid * 3 + 0) + direction[0] * 10;
+				currPositions(vid * 3 + 1) = currPositions(vid * 3 + 1) + direction[1] * 10;
+				currPositions(vid * 3 + 2) = currPositions(vid * 3 + 2) + direction[2] * 10;
+			}
+			shrinkShape = false;
+		}
+
 		VectorXd rhs = (M * currVelocities) - ((Kappa * (currPositions - origPositions)) - M * F_ext) * timeStep;
 
 		currVelocities = ASolver->solve(rhs);
@@ -646,13 +692,14 @@ public:
 	vector<Constraint> userConstraints;	   //provided from the scene
 	vector<Constraint> barrierConstraints; //provided by the platform
 
-	void setForceOptional(double optionalForce_x, double optionalForce_y, double optionalForce_z) //float vector3
+	//void setForceOptional(double optionalForce_x, double optionalForce_y, double optionalForce_z) //float vector3
+	//{
+	//	meshes[1].setForceOptional(optionalForce_x, optionalForce_y, optionalForce_z);
+	//}
+
+	void ShrinkMesh(float factor)
 	{
-		for (Mesh mesh : meshes)
-		{
-			mesh.setForceOptional(optionalForce_x, optionalForce_y, optionalForce_z);
-		}
-		
+		meshes[1].ShrinkShape(factor);
 	}
 
 	//updates from global values back into mesh values

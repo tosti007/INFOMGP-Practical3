@@ -159,7 +159,7 @@ bool pre_draw(igl::opengl::glfw::Viewer &viewer)
 class CustomMenu : public igl::opengl::glfw::imgui::ImGuiMenu
 {
 	float optionalForce[3] = { 0, 0, 0 };
-
+	float shrinkFactor = 4;
     virtual void draw_viewer_menu() override
     {
         // Draw parent menu
@@ -177,10 +177,12 @@ class CustomMenu : public igl::opengl::glfw::imgui::ImGuiMenu
         }
 		if (ImGui::CollapsingHeader("Interaction", ImGuiTreeNodeFlags_DefaultOpen))
 		{
-			ImGui::InputFloat3("Force to squish", optionalForce, 2);
-			if (ImGui::Button("Apply Force once"))
+			//ImGui::InputFloat3("Force to squish", optionalForce, 2);
+			ImGui::InputFloat("Shrink Factor", &shrinkFactor);
+			if (ImGui::Button("Apply Shrink"))
 			{
-				scene.setForceOptional((double)optionalForce[0], (double)optionalForce[1], (double)optionalForce[2]);
+				scene.ShrinkMesh(shrinkFactor);
+				//scene.setForceOptional((double)optionalForce[0], (double)optionalForce[1], (double)optionalForce[2]);
 			}
 		}
     }
