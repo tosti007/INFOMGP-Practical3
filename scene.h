@@ -48,7 +48,7 @@ public:
 
 	VectorXi boundTets; //just the boundary tets, for collision
 
-	double youngModulus, poissonRatio, density, alpha, beta;
+	double youngModulus, poissonRatio, density;
 
 	SparseMatrix<double> A, Kappa, M, D; //The soft-body matrices
 
@@ -407,8 +407,10 @@ public:
 			// Calculate Be
 			SparseMatrix<double> Be(6, 12);
 			Be = constD * Je;
+
+			// Calculate Ke
 			SparseMatrix<double> Ke_i(12, 12);
-			Ke_i = (Be.transpose() * C) * Be;
+			Ke_i = tetVolumes[tid] * (Be.transpose() * C) * Be;
 			Ke.push_back(Ke_i);
 		}
 
@@ -458,7 +460,6 @@ public:
 
 		A = M + D * timeStep + Kappa * (timeStep * timeStep);
 
-		//Should currently fail since A is empty
 		if (ASolver == NULL)
 			ASolver = new SimplicialLLT<SparseMatrix<double>>();
 		ASolver->analyzePattern(A);
