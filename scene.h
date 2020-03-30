@@ -591,8 +591,28 @@ public:
 			shrinkShape = false;
 		}
 
+		// (R^T)^⁻1 == (R^-1)^T
+		auto RT = R.transpose();
+		// Resize the matrices to 3xV
+		MatrixXd huidig = Eigen::Map<Eigen::MatrixXd>(currPositions.data(), 3, nr_vertices);
+		MatrixXd orginele = Eigen::Map<Eigen::MatrixXd>(origPositions.data(), 3, nr_vertices);
+		// (R*AT)T = ATT*RT = A*RT
+		MatrixXd differences = currPositions * RT.inverse() - origPositions;
+		// Resize back to 3Vx1
+		differences.resize(nr_vertices * 3, 1);
+		// Mutiply by Kappa
+		MatrixXd Kdifferences = Kappa * differences;
+		// Resize and rotate differences back
+		Kdifferences.resize(3, nr_vertices);
+		MatrixXd RKdifferences = Kdifferences * RT;
+		// Resize back
+		RKdifferences.resize(nr_vertices * 3, 1);
+
+		VectorXd F_int(Map<VectorXd>(RKdifferences.data(), RKdifferences.cols() * RKdifferences.rows()));
+		VectorXd rhs = (M * currVelocities) - (F_int - M * F_ext) * timeStep;
+
 		// VectorXd rhs = (M * currVelocities) - ((Kappa * (currPositions - origPositions)) - M * F_ext) * timeStep;
-		VectorXd rhs = (M * currVelocities) - ((R * Kappa * (R.inverse() * currPositions - origPositions)) - M * F_ext) * timeStep;
+		// VectorXd rhs = (M * currVelocities) - ((R * Kappa * (R.inverse() * currPositions - origPositions)) - M * F_ext) * timeStep;
 
 		currVelocities = ASolver->solve(rhs);
 	}
