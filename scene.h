@@ -606,6 +606,9 @@ public:
 		std::cout << m << std::endl;
 			*/
 
+		// Without rotation: f = K(x - x0)
+		// With rotation:    f = RK(R^-1 * x - x0)
+
 		// (R^T)^⁻1 == (R^-1)^T
 		auto RT = R.transpose();
 		// Resize the matrices to 3xV
