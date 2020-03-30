@@ -159,7 +159,7 @@ bool pre_draw(igl::opengl::glfw::Viewer &viewer)
 class CustomMenu : public igl::opengl::glfw::imgui::ImGuiMenu
 {
 	float optionalForce[3] = { 0, 0, 0 };
-	float shrinkFactor = 4;
+	float shrinkFactor = 11;
     virtual void draw_viewer_menu() override
     {
         // Draw parent menu

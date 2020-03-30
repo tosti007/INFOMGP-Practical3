@@ -570,9 +570,9 @@ public:
 				//F_ext(vid * 3 + 0) = F_ext(vid * 3 + 0) + direction[0] * 1000;
 				//F_ext(vid * 3 + 1) = F_ext(vid * 3 + 1) + direction[1] * 1000;
 				//F_ext(vid * 3 + 2) = F_ext(vid * 3 + 2) + direction[2] * 1000;
-				currPositions(vid * 3 + 0) = currPositions(vid * 3 + 0) + direction[0] * 10;
-				currPositions(vid * 3 + 1) = currPositions(vid * 3 + 1) + direction[1] * 10;
-				currPositions(vid * 3 + 2) = currPositions(vid * 3 + 2) + direction[2] * 10;
+				currPositions(vid * 3 + 0) = currPositions(vid * 3 + 0) + direction[0] * shrinkFactor;
+				currPositions(vid * 3 + 1) = currPositions(vid * 3 + 1) + direction[1] * shrinkFactor;
+				currPositions(vid * 3 + 2) = currPositions(vid * 3 + 2) + direction[2] * shrinkFactor;
 			}
 			shrinkShape = false;
 		}
