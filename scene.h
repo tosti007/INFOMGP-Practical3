@@ -609,23 +609,26 @@ public:
 		// Without rotation: f = K(x - x0)
 		// With rotation:    f = RK(R^-1 * x - x0)
 
-		// (R^T)^⁻1 == (R^-1)^T
-		auto RT = R.transpose();
 		// Resize the matrices to 3xV
 		MatrixXd huidig = Eigen::Map<Eigen::MatrixXd>(currPositions.data(), 3, nr_vertices);
-		MatrixXd orginele = Eigen::Map<Eigen::MatrixXd>(origPositions.data(), 3, nr_vertices);
-		// (R*AT)T = ATT*RT = A*RT
-		MatrixXd differences = huidig * RT.inverse() - orginele;
+		huidig.transposeInPlace();
+		// Caculate (rotated) difference
+		MatrixXd rotated = R.inverse() * huidig;
 		// Resize back to 3Vx1
-		differences.resize(nr_vertices * 3, 1);
+		rotated.transposeInPlace();
+		rotated.resize(nr_vertices * 3, 1);
 		// Mutiply by Kappa
-		MatrixXd Kdifferences = Kappa * differences;
-		// Resize and rotate differences back
+		MatrixXd Kdifferences = Kappa * (rotated - origPositions);
+		// Resize to 3xV
 		Kdifferences.resize(3, nr_vertices);
-		MatrixXd RKdifferences = Kdifferences * RT;
+		Kdifferences.transposeInPlace();
+		// Rotate differences back
+		MatrixXd RKdifferences = R * Kdifferences;
 		// Resize back
+		RKdifferences.transposeInPlace();
 		RKdifferences.resize(nr_vertices * 3, 1);
 
+		// Create a vector
 		VectorXd F_int(Map<VectorXd>(RKdifferences.data(), RKdifferences.cols() * RKdifferences.rows()));
 		VectorXd rhs = (M * currVelocities) - (F_int - M * F_ext) * timeStep;
 
