@@ -59,7 +59,7 @@ public:
 
 	SparseMatrix<double> A, Kappa, M, D; //The soft-body matrices
 
-	SimplicialLLT<SparseMatrix<double>> *ASolver; //the solver for the left-hand side matrix constructed for FEM
+	ConjugateGradient<SparseMatrix<double>> *ASolver; //the solver for the left-hand side matrix constructed for FEM
 
 	~Mesh()
 	{
@@ -483,7 +483,7 @@ public:
 		A = M + D * timeStep + Kappa * (timeStep * timeStep);
 
 		if (ASolver == NULL)
-			ASolver = new SimplicialLLT<SparseMatrix<double>>();
+			ASolver = new ConjugateGradient<SparseMatrix<double>>();
 		ASolver->analyzePattern(A);
 		ASolver->factorize(A);
 	}
