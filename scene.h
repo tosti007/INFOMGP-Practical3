@@ -591,6 +591,21 @@ public:
 			shrinkShape = false;
 		}
 
+		/*
+		VectorXd mm(12);
+		mm << 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12;
+		std::cout << "VECTOR:\n" << mm << std::endl;
+
+		MatrixXd m = Eigen::Map<Eigen::MatrixXd>(mm.data(), 3, 4);
+		m.transposeInPlace();
+		// m.resize(3, currPositions.rows() / 3);
+		std::cout << m << std::endl;
+		// DO SOMETHING
+		m.transposeInPlace();
+		m.resize(12, 1);
+		std::cout << m << std::endl;
+			*/
+
 		// (R^T)^⁻1 == (R^-1)^T
 		auto RT = R.transpose();
 		// Resize the matrices to 3xV
