@@ -1,6 +1,8 @@
 #ifndef SCENE_HEADER_FILE
 #define SCENE_HEADER_FILE
 
+// #define USE_COROTATIONAL
+
 #include "auxfunctions.h"
 #include "ccd.h"
 #include "constraints.h"
@@ -597,6 +599,7 @@ public:
 		// Without rotation: f = K(x - x0)
 		// With rotation:    f = RK(R^-1 * x - x0)
 
+#ifdef USE_COROTATIONAL
 		// Resize the matrices to 3xV
 		MatrixXd huidig = Eigen::Map<Eigen::MatrixXd>(currPositions.data(), 3, nr_vertices);
 		// Caculate (rotated) difference
@@ -615,9 +618,9 @@ public:
 		// Create a vector
 		VectorXd F_int(Map<VectorXd>(RKdifferences.data(), RKdifferences.cols() * RKdifferences.rows()));
 		VectorXd rhs = (M * currVelocities) - (F_int - M * F_ext) * timeStep;
-
-		// VectorXd rhs = (M * currVelocities) - ((Kappa * (currPositions - origPositions)) - M * F_ext) * timeStep;
-		// VectorXd rhs = (M * currVelocities) - ((R * Kappa * (R.inverse() * currPositions - origPositions)) - M * F_ext) * timeStep;
+#else
+		VectorXd rhs = (M * currVelocities) - ((Kappa * (currPositions - origPositions)) - M * F_ext) * timeStep;
+#endif
 
 		currVelocities = ASolver->solve(rhs);
 	}
