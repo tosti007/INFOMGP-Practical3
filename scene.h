@@ -50,7 +50,8 @@ public:
 	//Vector3d F_optional;
 	//bool newF_optional = false;
 
-	float shrinkFactor = 0;
+	int shrinkFactorMin = 0;
+	int shrinkFactorMax = 0;
 	bool shrinkShape = false;
 
 	VectorXi boundTets; //just the boundary tets, for collision
@@ -75,9 +76,10 @@ public:
 	//	newF_optional = true;
 	//}
 
-	void ShrinkShape(float factor)
+	void ShrinkShape(int factorMin, int factorMax)
 	{
-		shrinkFactor = factor;
+		shrinkFactorMin = factorMin;
+		shrinkFactorMax = factorMax;
 		shrinkShape = true;
 	}
 
@@ -570,9 +572,10 @@ public:
 				//F_ext(vid * 3 + 0) = F_ext(vid * 3 + 0) + direction[0] * 1000;
 				//F_ext(vid * 3 + 1) = F_ext(vid * 3 + 1) + direction[1] * 1000;
 				//F_ext(vid * 3 + 2) = F_ext(vid * 3 + 2) + direction[2] * 1000;
-				currPositions(vid * 3 + 0) = currPositions(vid * 3 + 0) + direction[0] * shrinkFactor;
-				currPositions(vid * 3 + 1) = currPositions(vid * 3 + 1) + direction[1] * shrinkFactor;
-				currPositions(vid * 3 + 2) = currPositions(vid * 3 + 2) + direction[2] * shrinkFactor;
+				double scalingFactor = rand() % (shrinkFactorMax + 1 - shrinkFactorMin) + shrinkFactorMin;
+				currPositions(vid * 3 + 0) = currPositions(vid * 3 + 0) + direction[0] * scalingFactor;
+				currPositions(vid * 3 + 1) = currPositions(vid * 3 + 1) + direction[1] * scalingFactor;
+				currPositions(vid * 3 + 2) = currPositions(vid * 3 + 2) + direction[2] * scalingFactor;
 			}
 			shrinkShape = false;
 		}
@@ -697,9 +700,9 @@ public:
 	//	meshes[1].setForceOptional(optionalForce_x, optionalForce_y, optionalForce_z);
 	//}
 
-	void ShrinkMesh(float factor)
+	void ShrinkMesh(int factorMin, int factorMax)
 	{
-		meshes[1].ShrinkShape(factor);
+		meshes[1].ShrinkShape(factorMin, factorMax);
 	}
 
 	//updates from global values back into mesh values
